@@ -18,14 +18,14 @@ public class TreeMaker {
 		heads = new ArrayList<Node>();
 		index = 0;
 		while (index < this.nodes.size()) {
-			if (this.nodes.get(index).hasNext()) {
+			if (!this.nodes.get(index).hasNext()) {
 				throw new HeadException();
 			}
 			heads.add(makeTree(this.nodes.get(index)));
 		}
 	}
 	
-	protected List<Node> getHeads() {
+	public List<Node> getHeads() {
 		return heads;
 	}
 	
