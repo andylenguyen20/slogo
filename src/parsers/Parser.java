@@ -94,9 +94,9 @@ public class Parser
 	 * @throws ClassNotFoundException 
 	 * @throws InvalidEntryException 
 	 */
-	public List<Node> parseString(String command) throws ClassNotFoundException, InvalidEntryException
+	public List<Node> parseString(String command)
 	{
-		
+		System.out.println("hi");
 		String[] commandList = command.trim().split("\\s+(?![^\\[]*\\])");
 		for(String s: commandList)
 		{

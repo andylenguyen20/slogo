@@ -18,7 +18,7 @@ public class Controller implements ControllerInterface{
 	public Controller(Stage stage){
 //		this.model = model;
 		turtle = new Turtle(Drawer.TURTLE_START_X, Drawer.TURTLE_START_Y);
-		//parser = new Parser(turtle, "English");
+		parser = new Parser(turtle, "English");
 		gui = new GUI();
 		gui.start(stage);
 		this.initializeGUIComponents();
@@ -37,7 +37,7 @@ public class Controller implements ControllerInterface{
 	
     @Override
 	public void passCommand(String s){
-        //parser.parseString(s);
+        parser.parseString(s);
     }
 
     @Override
