@@ -120,6 +120,7 @@ public class Drawer extends ScreenComponent{
 
 
 
+	
 	private void drawLines(List<Line> lines){
 		gc.setStroke(penColor);
 		for (int x = 0; x < lines.size(); x++){
