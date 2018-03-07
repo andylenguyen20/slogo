@@ -26,11 +26,21 @@ public class Model {
 		activeTurtles = new ArrayList<>();
 		allTurtles = new HashMap<>();
 		
-		Turtle initial = new Turtle(width, height, Color.BLUE, 1.0);
+		Turtle initial = new SingleTurtle(width, height);
+		Turtle initial2 = new SingleTurtle(width+100, height+100);
+		List<SingleTurtle> t = new ArrayList<>();
+		t.add((SingleTurtle) initial);
+		t.add((SingleTurtle) initial2);
 		
-		allTurtles.put(1.0, initial);
-		activeTurtles.add(initial);
+		Turtle multiple = new MultipleTurtles(width,height,t);
 		
+		//allTurtles.put(1.0, initial);
+		setActiveTurtle(multiple);
+		
+	}
+	
+	public void setActiveTurtle(Turtle turt) {
+		activeTurtles.add(turt);
 	}
 	
 	public List<Shape> getShapeOptions() 
@@ -47,10 +57,6 @@ public class Model {
 		allTurtles.put((double) turt.getValue(), turt);
 	}
 	
-	public void addActiveTurtle(Turtle turt) {
-		activeTurtles.add(turt);
-	}
-
 	public Color getBackgroundColor() 
 	{
 		return backgroundColor;
@@ -68,6 +74,7 @@ public class Model {
 	
 	public void setColorOptions(double index, double R, double G, double B) {
 		//EXCEPTION FOR IF R,G,B ARE OUT OF BOUNDS
+		//FUNCTIONALITY
 		
 		this.colorOptions = colorOptions;
 	}

@@ -38,12 +38,14 @@ public class Backward extends GeneralCommand implements CommandInterface
 	 */
 	public double evaluate(List<NodeInterface> arguments)
 	{
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			double xCor = turtle.getXCoordinate() - arguments.get(0).getValue()*Math.cos(turtle.getDirectionAngle()*radianConversion);
-			double yCor = turtle.getYCoordinate() + arguments.get(0).getValue()*Math.sin(turtle.getDirectionAngle()*radianConversion);
-			turtle.setCoordinates(xCor,yCor);
-		}
+		model.getActiveTurtles().get(model.getActiveTurtles().size()-1).move(-1*arguments.get(0).getValue());
+		
+//		for (Turtle turtle: model.getActiveTurtles())
+//		{
+//			double xCor = turtle.getXCoordinate() - arguments.get(0).getValue()*Math.cos(turtle.getDirectionAngle()*radianConversion);
+//			double yCor = turtle.getYCoordinate() + arguments.get(0).getValue()*Math.sin(turtle.getDirectionAngle()*radianConversion);
+//			turtle.setCoordinates(xCor,yCor);
+//		}
 		value = arguments.get(0).getValue();
 		return value;
 	}

@@ -22,15 +22,16 @@ public class Right extends GeneralCommand implements CommandInterface {
 	 */
 	public double evaluate(List<NodeInterface> arguments)
 	{
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			double deg = turtle.getDirectionAngle() - arguments.get(0).getValue();
-			if (deg < 0)
-			{
-				deg = 360 + deg;
-			}
-			turtle.setDirectionAngle(deg);
-		}
+		model.getActiveTurtles().get(model.getActiveTurtles().size()-1).rotate(arguments.get(0).getValue());
+//		for (Turtle turtle: model.getActiveTurtles())
+//		{
+//			double deg = turtle.getDirectionAngle() - arguments.get(0).getValue();
+//			if (deg < 0)
+//			{
+//				deg = 360 + deg;
+//			}
+//			turtle.setDirectionAngle(deg);
+//		}
 		value = arguments.get(0).getValue();
 		return value;
 	}
