@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.CommandHistory;
 import model.CommandHistoryObservable;
+import propertiesFiles.ResourceBundleManager;
 import view.Observer;
 import view.constants.ButtonConstants;
 import view.constants.LabelConstants;
@@ -48,8 +49,8 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 
 	private void addButtonAndLabels(BorderPane borderPane){
 		HBox topComponent = new HBox();
-		clearButton = new Button(ButtonConstants.HISTORY_BUTTON_LABEL);
-		Label label = new Label(LabelConstants.HISTORY_LABEL_TEXT);
+		clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("HISTORY_BUTTON_LABEL"));
+		Label label = new Label(ResourceBundleManager.retrieveLabel("HISTORY_LABEL_TEXT"));
 		topComponent.getChildren().add(label);
 		topComponent.getChildren().add(clearButton);
 		borderPane.setTop(topComponent);

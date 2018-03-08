@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import propertiesFiles.ResourceBundleManager;
 import view.constants.ButtonConstants;
 import view.constants.ComboBoxConstants;
 import view.constants.LabelConstants;
@@ -51,7 +52,7 @@ public class CommandBox extends ScreenComponent{
 		BorderPane borderPane = super.getBorderPane();
 		this.addInputMenu(borderPane);
 		this.addConsoleWindow(borderPane);
-		commandLabel = new Label(LabelConstants.COMMAND_LABEL_TEXT);
+		commandLabel = new Label(ResourceBundleManager.retrieveLabel("COMMAND_LABEL_TEXT"));
 		borderPane.setTop(commandLabel);
 	}
 	
@@ -64,8 +65,8 @@ public class CommandBox extends ScreenComponent{
 	
 	private void addInputMenu(BorderPane borderPane){
 		VBox rightComponent = new VBox();
-		commandRunButton = new Button(ButtonConstants.COMMAND_RUN_BUTTON_LABEL);
-		commandClearButton = new Button(ButtonConstants.COMMAND_CLEAR_BUTTON_LABEL);
+		commandRunButton = new Button(ResourceBundleManager.retrieveButtonLabel("COMMAND_RUN_BUTTON_LABEL"));
+		commandClearButton = new Button(ResourceBundleManager.retrieveButtonLabel("COMMAND_CLEAR_BUTTON_LABEL"));
 		languageBox = this.getLanguageBox();
 		rightComponent.getChildren().add(commandRunButton);
 		rightComponent.getChildren().add(commandClearButton);

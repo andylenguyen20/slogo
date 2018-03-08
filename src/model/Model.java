@@ -38,7 +38,7 @@ public class Model implements ColorIndexObservable{
 		activeTurtles = new ArrayList<>();
 		allTurtles = new HashMap<>();
 		
-		Turtle initial = new Turtle(width, height, Color.BLUE, 1.0, TURTLE_0);
+		Turtle initial = new Turtle(width, height, colorOptions.get(0), 1.0, TURTLE_0);
 		
 		allTurtles.put(1.0, initial);
 		activeTurtles.add(initial);

@@ -2,6 +2,7 @@ package view.screen_components;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import propertiesFiles.ResourceBundleManager;
 import view.constants.ButtonConstants;
 import view.help_items.HelpPopup;
 
@@ -26,7 +27,7 @@ public class HelpButton extends ScreenComponent{
     }
 
     private void addHelpButton(BorderPane borderPane){
-        commandHelpButton = new Button(ButtonConstants.COMMAND_HELP_BUTTON_LABEL);
+        commandHelpButton = new Button(ResourceBundleManager.retrieveButtonLabel("COMMAND_HELP_BUTTON_LABEL"));
         borderPane.setCenter(commandHelpButton);
     }
 

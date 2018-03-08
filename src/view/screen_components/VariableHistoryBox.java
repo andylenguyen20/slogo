@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import model.VariableHistoryObservable;
+import propertiesFiles.ResourceBundleManager;
 import view.Observer;
 import view.constants.ButtonConstants;
 import view.constants.LabelConstants;
@@ -68,8 +69,8 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 
 	private void addButtonAndLabels(BorderPane borderPane){
 		HBox topComponent = new HBox();
-		clearButton = new Button(ButtonConstants.VARIABLE_BUTTON_LABEL);
-		Label label = new Label(LabelConstants.VARIABLE_LABEL_TEXT);
+		clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("VARIABLE_BUTTON_LABEL"));
+		Label label = new Label(ResourceBundleManager.retrieveLabel("VARIABLE_LABEL_TEXT"));
 		topComponent.getChildren().add(label);
 		topComponent.getChildren().add(clearButton);
 		borderPane.setTop(topComponent);
