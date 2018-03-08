@@ -12,6 +12,7 @@ import nodes.NodeInterface;
 
 import view.Observer;
 
+
 public class Turtle implements TurtleObservable, NodeInterface
 {
 	private double XCoordinate;
@@ -27,15 +28,16 @@ public class Turtle implements TurtleObservable, NodeInterface
 	
 	private WraparoundHandler toroidal;
 
-	private Shape turtleShape;
+	private String turtleShape;
 	private double ID;
 	
 	//THIS IS ANDY'S SUGGESTION
 	private Observer turtleObserver;
 
 	//Could pass pen color in parameter! Right now we call setPenColor in controller. TODO: Discuss this idea, Also screen size in constructor?
-	public Turtle(double width, double height, Color color, double ID)
+	public Turtle(double width, double height, Color color, double ID, String startShape)
 	{
+		turtleShape = startShape;
 		XCoordinate = width/2;
 		YCoordinate = height/2;
 		home[0] = width/2;
@@ -143,13 +145,14 @@ public class Turtle implements TurtleObservable, NodeInterface
 		this.penSize = pixels;
 	}
 	
-	public Shape getTurtleShape() {
+	public String getTurtleShape() {
 		return turtleShape;
 	}
 
-	public void setTurtleShape(Shape turtleShape) 
+	public void setTurtleShape(String turtleShape)
 	{
 		this.turtleShape = turtleShape;
+		turtleObserver.notifyOfChanges();
 	}
 
 	@Override

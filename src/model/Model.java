@@ -9,33 +9,65 @@ import java.util.function.Consumer;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import view.Observer;
+import view.screen_components.Palette;
 
-public class Model {
-	
+public class Model implements ColorIndexObservable{
+
+	private static final String TURTLE_0 = "black_and_white_turtle.PNG";
+	private static final String TURTLE_1 = "colorful_turtle.png";
+	private static final String TURTLE_2 = "green_turtle.png";
+	private static final String TURTLE_3 = "SLogo.PNG";
+	private static final String TURTLE_4 = "fd_arrow.png";
+	private static final String TURTLE_5 = "lt_arrow.png";
+	private static final String TURTLE_6 = "bk_arrow.png";
+
+
 	private Color backgroundColor;
 	private List<Color> colorOptions;
-	private List<Shape> shapeOptions;
+	private List<String> shapeOptions;
 	private List<Turtle> activeTurtles;
 	private Map<Double,Turtle> allTurtles;
+	private Observer colorIndexObserver;
 	
 	public Model(double width, double height)
 	{
 		//needs actual colors
-		colorOptions = new ArrayList<>();
-		colorOptions.add(Color.BLUE);
-		colorOptions.add(Color.RED);
-		shapeOptions = new ArrayList<>();
+		initializeColors();
+		initializeShapes();
 		activeTurtles = new ArrayList<>();
 		allTurtles = new HashMap<>();
 		
-		Turtle initial = new Turtle(width, height, Color.BLUE, 1.0);
+		Turtle initial = new Turtle(width, height, Color.BLUE, 1.0, TURTLE_0);
 		
 		allTurtles.put(1.0, initial);
 		activeTurtles.add(initial);
-		
+
+	}
+
+	private void initializeColors(){
+		colorOptions = new ArrayList<>();
+		colorOptions.add(Color.RED);
+		colorOptions.add(Color.ORANGE);
+		colorOptions.add(Color.YELLOW);
+		colorOptions.add(Color.GREEN);
+		colorOptions.add(Color.BLUE);
+		colorOptions.add(Color.INDIGO);
+		colorOptions.add(Color.VIOLET);
+	}
+
+	private void initializeShapes(){
+		shapeOptions = new ArrayList<>();
+		shapeOptions.add(TURTLE_0);
+		shapeOptions.add(TURTLE_1);
+		shapeOptions.add(TURTLE_2);
+		shapeOptions.add(TURTLE_3);
+		shapeOptions.add(TURTLE_4);
+		shapeOptions.add(TURTLE_5);
+		shapeOptions.add(TURTLE_6);
 	}
 	
-	public List<Shape> getShapeOptions() 
+	public List<String> getShapeOptions()
 	{
 		return shapeOptions;
 	}
@@ -70,14 +102,14 @@ public class Model {
 	
 	public void setColorOptions(double index, double R, double G, double B) {
 		//EXCEPTION FOR IF R,G,B ARE OUT OF BOUNDS
-		
-		this.colorOptions = colorOptions;
+		colorOptions.set((int) index, Color.rgb((int) R, (int) G, (int) B));
+		colorIndexObserver.notifyOfChanges();
 	}
 	
 	public Color getColorAtIndex(double index)
 	{
 		//EXCEPTION FOR IF AN INDEX IS OUT OF BOUNDS
-		
+		colorIndexObserver.notifyOfChanges();
 		return colorOptions.get((int)index);
 	}
 	
@@ -91,6 +123,20 @@ public class Model {
 			T.accept(t);
 		}
 	}
-	
+
+
+	public void addObserver(Observer colorListObserver) {
+		this.colorIndexObserver = colorListObserver;
+	}
+
+	@Override
+	public List<Color> getColorList() {
+		return colorOptions;
+	}
+
+	public void initializePalette(){
+		colorIndexObserver.notifyOfChanges();
+	}
+
 
 }

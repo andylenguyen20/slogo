@@ -126,6 +126,7 @@ public class Drawer extends ScreenComponent implements Observer{
 
 	public void update(){
 		drawerCanvas.setTurtle(turtle);
+		drawerCanvas.changeTurtleImage(turtle.getTurtleShape());
 		drawerCanvas.update();
 	}
 

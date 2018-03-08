@@ -57,6 +57,9 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 			drawer.setTurtle(turtle);
 			drawer.update();
 		}
+		model.addObserver(palette);
+		palette.setColorIndex(model);
+		model.initializePalette();
 		variableHistoryBox.setVariableHistory(variableHistory);
 		commandHistoryBox.setCommandHistory(commandHistory);
 		commandHistory.addObserver(commandHistoryBox);

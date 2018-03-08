@@ -11,4 +11,5 @@ public interface TurtleObservable {
     public double getDirectionAngle();
     public List<Line> getLines();
     public boolean getTurtleShowing();
+    String getTurtleShape();
 }
