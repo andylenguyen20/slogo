@@ -43,7 +43,7 @@ public class Parser
 	 * Creates the two hashmaps for the syntax recognition and command recognition
 	 * given the current language.
 	 * 
-	 * @param t the current turtle
+	 * @param m the current model
 	 * @param VH the variable history
 	 * @param CH the command history
 	 */
@@ -97,7 +97,7 @@ public class Parser
 	/**
 	 * Creates a list of nodes out of the string command given as an argument
 	 * 
-	 * @param command The string command from the GUI
+	 * @param language The language from the GUI
 	 * @return a list of nodes that the tree builder can use to create the tree
 	 * @throws ClassNotFoundException 
 	 * @throws InvalidEntryException 
@@ -126,21 +126,8 @@ public class Parser
 		checkSyntax(commandList, nodeList);
 		return nodeList;
 	}
-	
-	public List<NodeInterface> parseString(String command, String language)
-	{
-		String oldLanguage = lang;
-		setLanguage(ResourceBundleManager.retrieveOnScreenCommand(language));
-		
-		List<NodeInterface> fromButton = parseString(command);
-		
-		setLanguage(oldLanguage);
-		
-		return fromButton;
-		
-	}
 
-	public List<NodeInterface> parseActionCommand(String command)
+	public List<NodeInterface> passActionCommand(String command)
 	{
 		String oldLanguage = lang;
 		setLanguage(ResourceBundleManager.retrieveOnScreenCommand("DEFAULT_LANGUAGE"));
@@ -148,6 +135,11 @@ public class Parser
 		setLanguage(oldLanguage);
 		return fromButton;
 
+	}
+
+	public void passTextCommand(String command){
+		List<NodeInterface> nodeList = this.parseString(command);
+		this.makeTree(nodeList);
 	}
 
 	

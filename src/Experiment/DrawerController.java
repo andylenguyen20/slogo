@@ -3,15 +3,15 @@ package Experiment;
 import model.Model;
 import parsers.Parser;
 import view.GUI;
-import view.screen_components.TheDrawer;
+import view.screen_components.Drawer;
 
 import java.util.function.Consumer;
 
-public class TheDrawerController extends TheController implements TheParserActionDelegate{
-    private TheDrawer drawer;
+public class DrawerController extends Controller implements ParserActionDelegate {
+    private Drawer drawer;
     private Model model;
     private Parser parser;
-    public TheDrawerController(GUI gui, Model model, Parser parser){
+    public DrawerController(GUI gui, Model model, Parser parser){
         super(gui);
         this.model = model;
         this.parser = parser;
@@ -19,7 +19,7 @@ public class TheDrawerController extends TheController implements TheParserActio
 
     @Override
     protected void initializeScreenComponents() {
-        drawer = new TheDrawer();
+        drawer = new Drawer();
     }
 
     @Override

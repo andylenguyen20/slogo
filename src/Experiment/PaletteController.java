@@ -4,10 +4,10 @@ import model.Model;
 import view.GUI;
 import view.screen_components.Palette;
 
-public class ThePaletteController extends TheController{
+public class PaletteController extends Controller {
     private Model model;
     private Palette palette;
-    public ThePaletteController(GUI gui, Model model){
+    public PaletteController(GUI gui, Model model){
         super(gui);
         this.model = model;
     }

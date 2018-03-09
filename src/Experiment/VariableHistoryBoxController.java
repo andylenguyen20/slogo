@@ -5,10 +5,10 @@ import model.VariablesHistory;
 import view.GUI;
 import view.screen_components.VariableHistoryBox;
 
-public class TheVariableHistoryBoxController extends TheController implements TheClearValueDelegate, TheValueModifierDelegate {
+public class VariableHistoryBoxController extends Controller implements ClearValueDelegate, ValueModifierDelegate {
     private VariablesHistory variablesHistory;
     private VariableHistoryBox variableHistoryBox;
-    public TheVariableHistoryBoxController(GUI gui, VariablesHistory variablesHistory){
+    public VariableHistoryBoxController(GUI gui, VariablesHistory variablesHistory){
         super(gui);
         this.variablesHistory = variablesHistory;
     }
@@ -34,7 +34,7 @@ public class TheVariableHistoryBoxController extends TheController implements Th
 
     @Override
     public void clear() {
-        variablesHistory.clearHistory();
+        variablesHistory.clearVariableHistory();
     }
 
     @Override

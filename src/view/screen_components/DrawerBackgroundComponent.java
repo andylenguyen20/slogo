@@ -4,11 +4,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class TheDrawerBackgroundComponent {
+public class DrawerBackgroundComponent {
     private static final Color BORDER_COLOR = Color.BLACK;
     private Canvas canvas;
     private GraphicsContext gc;
-    public TheDrawerBackgroundComponent(Canvas canvas){
+    public DrawerBackgroundComponent(Canvas canvas){
         this.canvas = canvas;
         this.gc = canvas.getGraphicsContext2D();
     }

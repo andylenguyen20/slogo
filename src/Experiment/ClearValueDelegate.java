@@ -1,5 +1,5 @@
 package Experiment;
 
-public interface TheClearValueDelegate {
+public interface ClearValueDelegate {
     void clear();
 }

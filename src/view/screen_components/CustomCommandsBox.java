@@ -1,7 +1,7 @@
 package view.screen_components;
 
-import Experiment.TheClearValueDelegate;
-import Experiment.TheParserActionDelegate;
+import Experiment.ClearValueDelegate;
+import Experiment.ParserActionDelegate;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.CustomCommandObservable;
+import propertiesFiles.ResourceBundleManager;
 import view.Observer;
 import view.help_items.HelpPopup;
 
@@ -18,26 +19,26 @@ import java.util.List;
 public class CustomCommandsBox extends ScreenComponent implements Observer {
     public static final int SCROLLPANE_WIDTH = 200;
     public static final int SCROLLPANE_HEIGHT = 100;
-    private CustomCommandObservable customCommandHolder;
+    private CustomCommandObservable customCommandObservable;
     private Button clearButton;
     private Button helpButton;
     private VBox commandList;
 
-    private TheParserActionDelegate theParserActionDelegate;
-    private TheClearValueDelegate theClearValueDelegate;
+    private ParserActionDelegate parserActionDelegate;
+    private ClearValueDelegate clearValueDelegate;
 
-    public void setTheParserActionDelegate(TheParserActionDelegate theParserActionDelegate){
-        this.theParserActionDelegate = theParserActionDelegate;
+    public void setParserActionDelegate(ParserActionDelegate parserActionDelegate){
+        this.parserActionDelegate = parserActionDelegate;
     }
 
-    public  void setTheClearValueDelegate(TheClearValueDelegate theClearValueDelegate){
-        this.theClearValueDelegate = theClearValueDelegate;
+    public  void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
+        this.clearValueDelegate = clearValueDelegate;
     }
 
     private void addButtonAndLabels(BorderPane borderPane) {
         HBox topComponent = new HBox();
-        clearButton = new Button("Clear");
-        helpButton = new Button("Help");
+        clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("CLEAR"));
+        helpButton = new Button(ResourceBundleManager.retrieveButtonLabel("HELP"));
         Label label = new Label("Custom Commands");
         topComponent.getChildren().add(label);
         topComponent.getChildren().add(clearButton);
@@ -53,19 +54,19 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
 
     }
 
-    public void setCustomCommandHolder(CustomCommandObservable holder){
-        this.customCommandHolder = holder;
+    public void setCustomCommandObservable(CustomCommandObservable customCommandObservable){
+        this.customCommandObservable = customCommandObservable;
     }
 
     @Override
     public void notifyOfChanges() {
-        List<String> commands = customCommandHolder.getCommands();
+        List<String> commands = customCommandObservable.getCommands();
         commandList.getChildren().clear();
         for(String command: commands){
             Button commandButton = new Button(command);
             commandButton.getStyleClass().add("runnableCommandButton");
             commandButton.setOnAction((event -> {
-                theParserActionDelegate.performParserAction(parser -> parser.parseString(commandButton.getText()));
+                parserActionDelegate.performParserAction(parser -> parser.passTextCommand(commandButton.getText()));
             }));
             commandList.getChildren().add(commandButton);
         }
@@ -74,7 +75,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     @Override
     protected void mapUserActions() {
         clearButton.setOnAction((event -> {
-            theClearValueDelegate.clear();
+            clearValueDelegate.clear();
         }));
         helpButton.setOnAction((event -> {
             HelpPopup popup = new HelpPopup();

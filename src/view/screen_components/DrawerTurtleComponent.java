@@ -5,9 +5,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import model.TurtleObservable;
-import view.Observer;
 
-public class TheDrawerTurtleComponent {
+public class DrawerTurtleComponent {
     private static final int TURTLE_WIDTH = 50;
     private static final int TURTLE_HEIGHT = 50;
     private final double X_OFFSET;
@@ -15,11 +14,11 @@ public class TheDrawerTurtleComponent {
     private ImageView turtleImage;
     private TurtleObservable turtle;
     private StackPane drawingScreen;
-    private TheDrawerLineComponent theDrawerLineComponent;
-    public TheDrawerTurtleComponent(TurtleObservable turtle, StackPane drawingScreen, Canvas lineCanvas){
+    private TurtleLineDrawer turtleLineDrawer;
+    public DrawerTurtleComponent(TurtleObservable turtle, StackPane drawingScreen, Canvas lineCanvas){
         this.turtle = turtle;
         this.drawingScreen = drawingScreen;
-        this.theDrawerLineComponent = new TheDrawerLineComponent(lineCanvas);
+        this.turtleLineDrawer = new TurtleLineDrawer(lineCanvas);
         X_OFFSET = lineCanvas.getWidth()/2;
         Y_OFFSET = lineCanvas.getHeight()/2;
         turtleImage = new ImageView();
@@ -31,7 +30,7 @@ public class TheDrawerTurtleComponent {
     }
 
     private void drawLines(){
-        theDrawerLineComponent.draw(turtle.getLines());
+        turtleLineDrawer.draw(turtle.getLines());
     }
 
     private void setTurtleImage(){

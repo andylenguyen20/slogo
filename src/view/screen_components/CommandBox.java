@@ -1,8 +1,6 @@
 package view.screen_components;
 
-import Experiment.TheParserActionDelegate;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import Experiment.ParserActionDelegate;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -10,7 +8,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import propertiesFiles.ResourceBundleManager;
-import view.constants.ComboBoxConstants;
 import view.constants.TextAreaConstants;
 import view.factories.ComboBoxFactory;
 
@@ -21,14 +18,14 @@ public class CommandBox extends ScreenComponent{
     private TextArea commandTextArea;
     private Label commandLabel;
     private ComboBox<String> languageBox;
-    private TheParserActionDelegate theParserActionDelegate;
+    private ParserActionDelegate parserActionDelegate;
 
 	public CommandBox() {
 		super();
 	}
 
-	public void setController(TheParserActionDelegate theParserActionDelegate){
-		this.theParserActionDelegate = theParserActionDelegate;
+	public void setController(ParserActionDelegate parserActionDelegate){
+		this.parserActionDelegate = parserActionDelegate;
 	}
 
 	@Override
@@ -37,15 +34,10 @@ public class CommandBox extends ScreenComponent{
 			commandTextArea.clear();
 		}));
 		commandRunButton.setOnAction((event -> {
-			theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString(commandTextArea.getText().trim())));
+			parserActionDelegate.performParserAction(parser -> parser.passTextCommand(commandTextArea.getText().trim()));
 			commandTextArea.clear();
 		}));
-		languageBox.valueProperty().addListener(new ChangeListener<Object>() {
-			@Override
-			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				changeLanguage();
-			}
-		});
+		languageBox.valueProperty().addListener((x,y,z)->changeLanguage());
 	}
 
 	public void generateGUIComponent(){
@@ -65,8 +57,8 @@ public class CommandBox extends ScreenComponent{
 	
 	private void addInputMenu(BorderPane borderPane){
 		VBox rightComponent = new VBox();
-		commandRunButton = new Button(ResourceBundleManager.retrieveButtonLabel("COMMAND_RUN_BUTTON_LABEL"));
-		commandClearButton = new Button(ResourceBundleManager.retrieveButtonLabel("COMMAND_CLEAR_BUTTON_LABEL"));
+		commandRunButton = new Button(ResourceBundleManager.retrieveButtonLabel("RUN"));
+		commandClearButton = new Button(ResourceBundleManager.retrieveButtonLabel("CLEAR"));
 		languageBox = ComboBoxFactory.generateStringComboBox(LANGUAGE_LIST);
 		rightComponent.getChildren().add(commandRunButton);
 		rightComponent.getChildren().add(commandClearButton);
@@ -75,6 +67,6 @@ public class CommandBox extends ScreenComponent{
 	}
 
 	private void changeLanguage(){
-    	theParserActionDelegate.performParserAction(parser -> parser.setLanguage(languageBox.getValue()));
+    	parserActionDelegate.performParserAction(parser -> parser.setLanguage(languageBox.getValue()));
 	}
 }

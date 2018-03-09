@@ -1,6 +1,6 @@
 package controller;
 
-import Experiment.TheWorkspace;
+import Experiment.Workspace;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -9,8 +9,8 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		//Controller controller = new Controller(primaryStage);
-		TheWorkspace theWorkspace = new TheWorkspace(primaryStage);
-		theWorkspace.startUp();
+		Workspace workspace = new Workspace(primaryStage);
+		workspace.startUp();
 	}
 
 	public static void main(String[] args){

@@ -7,10 +7,10 @@ import javafx.scene.shape.Line;
 
 import java.util.List;
 
-public class TheDrawerLineComponent {
+public class TurtleLineDrawer {
     private Canvas canvas;
     private GraphicsContext gc;
-    public TheDrawerLineComponent(Canvas canvas){
+    public TurtleLineDrawer(Canvas canvas){
         this.canvas = canvas;
         gc = canvas.getGraphicsContext2D();
     }

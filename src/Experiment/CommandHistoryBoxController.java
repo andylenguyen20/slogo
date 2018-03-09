@@ -7,11 +7,11 @@ import view.screen_components.CommandHistoryBox;
 
 import java.util.function.Consumer;
 
-public class TheCommandHistoryBoxController extends TheController implements TheParserActionDelegate, TheClearValueDelegate {
+public class CommandHistoryBoxController extends Controller implements ParserActionDelegate, ClearValueDelegate {
     private CommandHistoryBox commandHistoryBox;
     private CommandHistory commandHistory;
     private Parser parser;
-    public TheCommandHistoryBoxController(GUI gui, CommandHistory commandHistory, Parser parser){
+    public CommandHistoryBoxController(GUI gui, CommandHistory commandHistory, Parser parser){
         super(gui);
         this.commandHistory = commandHistory;
         this.parser = parser;
@@ -24,8 +24,8 @@ public class TheCommandHistoryBoxController extends TheController implements The
 
     @Override
     protected void setUpConnections() {
-        commandHistoryBox.setTheParserActionDelegate(this);
-        commandHistoryBox.setTheClearValueDelegate(this);
+        commandHistoryBox.setParserActionDelegate(this);
+        commandHistoryBox.setClearValueDelegate(this);
         commandHistoryBox.setCommandHistory(commandHistory);
         commandHistory.addObserver(commandHistoryBox);
     }

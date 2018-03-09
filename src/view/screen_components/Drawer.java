@@ -1,6 +1,6 @@
 package view.screen_components;
 
-import Experiment.TheParserActionDelegate;
+import Experiment.ParserActionDelegate;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ComboBox;
@@ -8,7 +8,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import model.PaletteObservable;
 import model.TurtleObservable;
 import model.DrawerObservable;
 import propertiesFiles.ResourceBundleManager;
@@ -19,7 +18,7 @@ import view.factories.ComboBoxFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TheDrawer extends ScreenComponent implements Observer{
+public class Drawer extends ScreenComponent implements Observer{
     public static final double CANVAS_WIDTH = 450;
     public static final double CANVAS_HEIGHT = 450;
     private static final int VERTICAL_INSET = 10;
@@ -34,17 +33,17 @@ public class TheDrawer extends ScreenComponent implements Observer{
     private ComboBox<Integer> turtleImageBox;
 
     private DrawerObservable drawerObservable;
-    private List<TheDrawerTurtleComponent> turtlesOnScreen;
+    private List<DrawerTurtleComponent> turtlesOnScreen;
     private List<TurtleObservable> linkedTurtles;
-    private TheDrawerBackgroundComponent backgroundComponent;
+    private DrawerBackgroundComponent backgroundComponent;
 
-    private TheParserActionDelegate parserActionDelegate;
+    private ParserActionDelegate parserActionDelegate;
 
     private StackPane drawingScreen;
     private Canvas linesLayer;
     private Canvas backgroundLayer;
 
-    public TheDrawer(){
+    public Drawer(){
         super();
         linkedTurtles = new ArrayList<>();
         turtlesOnScreen = new ArrayList<>();
@@ -55,8 +54,8 @@ public class TheDrawer extends ScreenComponent implements Observer{
         this.update();
     }
 
-    public void setTheParserActionDelegate(TheParserActionDelegate theParserActionDelegate){
-        this.parserActionDelegate = theParserActionDelegate;
+    public void setTheParserActionDelegate(ParserActionDelegate parserActionDelegate){
+        this.parserActionDelegate = parserActionDelegate;
     }
 
     @Override
@@ -77,7 +76,7 @@ public class TheDrawer extends ScreenComponent implements Observer{
         drawingScreen = new StackPane();
         linesLayer = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         backgroundLayer = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-        backgroundComponent = new TheDrawerBackgroundComponent(backgroundLayer);
+        backgroundComponent = new DrawerBackgroundComponent(backgroundLayer);
         backgroundComponent.changeBackgroundColor(Color.WHITE);
         drawingScreen.getChildren().add(backgroundLayer);
         drawingScreen.getChildren().add(linesLayer);
@@ -94,22 +93,22 @@ public class TheDrawer extends ScreenComponent implements Observer{
     }
 
     private void changeBackgroundColor(){
-        parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_BG") + backgroundColorBox.getValue())));
+        parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_BG") + backgroundColorBox.getValue())));
     }
 
     private void changePenColor(){
-        parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_PC") + penColorBox.getValue())));
+        parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_PC") + penColorBox.getValue())));
 
     }
 
     private void changeTurtleImage(){
-        parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_SH") + turtleImageBox.getValue())));
+        parserActionDelegate.performParserAction(parser -> parser.makeTree(parser.passActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SET_SH") + turtleImageBox.getValue())));
 
     }
 
     private void addFrontEndTurtle(TurtleObservable turtleObservable){
         linkedTurtles.add(turtleObservable);
-        turtlesOnScreen.add(new TheDrawerTurtleComponent(turtleObservable, drawingScreen, linesLayer));
+        turtlesOnScreen.add(new DrawerTurtleComponent(turtleObservable, drawingScreen, linesLayer));
     }
 
     public void update(){
@@ -119,7 +118,7 @@ public class TheDrawer extends ScreenComponent implements Observer{
             }
         }
         linesLayer.getGraphicsContext2D().clearRect(0,0,CANVAS_WIDTH, CANVAS_HEIGHT);
-        for(TheDrawerTurtleComponent frontEndTurtle : turtlesOnScreen){
+        for(DrawerTurtleComponent frontEndTurtle : turtlesOnScreen){
             frontEndTurtle.update();
         }
         backgroundComponent.changeBackgroundColor(drawerObservable.getBackgroundColor());

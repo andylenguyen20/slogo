@@ -73,7 +73,7 @@ public class GUI{
             this.positionBorderPane(screenComponent.getGUIComponent(), CUSTOM_COMMANDS_X, CUSTOM_COMMANDS_Y);
         }else if(screenComponent instanceof CommandHistoryBox){
             this.positionBorderPane(screenComponent.getGUIComponent(), COMMAND_HISTORY_BOX_X, COMMAND_HISTORY_BOX_Y);
-        }else if(screenComponent instanceof TheDrawer){
+        }else if(screenComponent instanceof Drawer){
             this.positionBorderPane(screenComponent.getGUIComponent(), DRAWER_X, DRAWER_Y);
         }else if(screenComponent instanceof HelpButton){
             this.positionBorderPane(screenComponent.getGUIComponent(), HELP_BUTTON_X, HELP_BUTTON_Y);

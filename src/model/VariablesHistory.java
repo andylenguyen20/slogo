@@ -99,10 +99,14 @@ public class VariablesHistory implements VariableHistoryObservable, CustomComman
 	/**
 	 * clears the variables in the map and on the screen
 	 */
-	public void clearHistory(){
+	public void clearVariableHistory(){
 		variables.clear();
-		commands.clear();
 		variableHistoryObserver.notifyOfChanges();
+	}
+
+	public void clearCommandHistory(){
+		commands.clear();
+		customCommandObserver.notifyOfChanges();
 	}
 
 	public void changeValue(String variableName, String value){

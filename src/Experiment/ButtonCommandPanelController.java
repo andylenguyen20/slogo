@@ -7,11 +7,11 @@ import view.screen_components.TurtleControlPanel;
 
 import java.util.function.Consumer;
 
-public class TheButtonCommandPanelController extends TheController implements TheParserActionDelegate {
+public class ButtonCommandPanelController extends Controller implements ParserActionDelegate {
     private Parser parser;
     private TurtleControlPanel turtleControlPanel;
     private PenControlPanel penControlPanel;
-    public TheButtonCommandPanelController(GUI gui, Parser parser){
+    public ButtonCommandPanelController(GUI gui, Parser parser){
         super(gui);
         this.parser = parser;
     }

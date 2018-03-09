@@ -6,10 +6,10 @@ import view.screen_components.CommandBox;
 
 import java.util.function.Consumer;
 
-public class TheCommandBoxController extends TheController implements TheParserActionDelegate {
+public class CommandBoxController extends Controller implements ParserActionDelegate {
     private Parser parser;
     private CommandBox commandBox;
-    public TheCommandBoxController(GUI gui, Parser parser){
+    public CommandBoxController(GUI gui, Parser parser){
         super(gui);
         this.parser = parser;
     }

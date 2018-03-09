@@ -1,7 +1,7 @@
 package view.screen_components;
 
-import Experiment.TheClearValueDelegate;
-import Experiment.TheParserActionDelegate;
+import Experiment.ClearValueDelegate;
+import Experiment.ParserActionDelegate;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -23,15 +23,15 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 		super();
 	}
 
-	private TheParserActionDelegate theParserActionDelegate;
-	private TheClearValueDelegate theClearValueDelegate;
+	private ParserActionDelegate parserActionDelegate;
+	private ClearValueDelegate clearValueDelegate;
 
-	public void setTheParserActionDelegate(TheParserActionDelegate theParserActionDelegate){
-		this.theParserActionDelegate = theParserActionDelegate;
+	public void setParserActionDelegate(ParserActionDelegate parserActionDelegate){
+		this.parserActionDelegate = parserActionDelegate;
 	}
 
-	public void setTheClearValueDelegate(TheClearValueDelegate theClearValueDelegate){
-		this.theClearValueDelegate = theClearValueDelegate;
+	public void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
+		this.clearValueDelegate = clearValueDelegate;
 	}
 
 	public void setCommandHistory(CommandHistory commandHistory){
@@ -41,7 +41,7 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 	@Override
 	protected void mapUserActions() {
 		clearButton.setOnAction((event -> {
-			theClearValueDelegate.clear();
+			clearValueDelegate.clear();
 		}));
 	}
 
@@ -52,7 +52,7 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 
 	private void addButtonAndLabels(BorderPane borderPane){
 		HBox topComponent = new HBox();
-		clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("HISTORY_BUTTON_LABEL"));
+		clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("CLEAR"));
 		Label label = new Label(ResourceBundleManager.retrieveLabel("HISTORY_LABEL_TEXT"));
 		topComponent.getChildren().add(label);
 		topComponent.getChildren().add(clearButton);
@@ -73,7 +73,7 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 			Button commandButton = new Button(command);
 			commandButton.getStyleClass().add("runnableCommandButton");
 			commandButton.setOnAction((event -> {
-				theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString(commandButton.getText())));
+				parserActionDelegate.performParserAction(parser -> parser.passTextCommand(commandButton.getText()));
 			}));
 			commandList.getChildren().add(commandButton);
 		}

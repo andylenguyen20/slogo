@@ -138,10 +138,6 @@ public class Model implements PaletteObservable, DrawerObservable {
 		colorIndexObserver.notifyOfChanges();
 	}
 
-	public void setDrawerObserver(Observer observer){
-		drawerObserver = observer;
-	}
-
 	@Override
 	public List<TurtleObservable> getTurtleObservables() {
 		List<TurtleObservable> turtleList = new ArrayList<>();

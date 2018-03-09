@@ -1,5 +1,5 @@
 package Experiment;
 
-public interface TheValueModifierDelegate {
+public interface ValueModifierDelegate {
     void changeValue(String value, String variableName);
 }

@@ -2,9 +2,9 @@ package Experiment;
 
 import view.GUI;
 
-public abstract class TheController {
+public abstract class Controller {
     private GUI gui;
-    public TheController(GUI gui){
+    public Controller(GUI gui){
         this.gui = gui;
     }
     protected abstract void initializeScreenComponents();
