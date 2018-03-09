@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.Model;
 import model.Turtle;
-import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
@@ -34,7 +33,7 @@ public class HideTurtle extends GeneralCommand {
 	 * @return 0
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		model.update((t) -> hideTurtle(t));
+		model.update(t -> hideTurtle(t));
 		value = 0;
 		return value;
 	}

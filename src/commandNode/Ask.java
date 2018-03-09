@@ -31,7 +31,7 @@ public class Ask extends GeneralCommand {
         }
 
         model.setActiveTurtles(tempActive);
-        model.update((t) -> command(commands));
+        model.update(t -> command(commands));
         model.setActiveTurtles(oldActive);
 
         return value;

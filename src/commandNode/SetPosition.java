@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.Model;
 import model.Turtle;
-import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
@@ -24,7 +23,7 @@ public class SetPosition extends GeneralCommand {
 	{
 		double x = arguments.get(0).getValue();
 		double y = arguments.get(1).getValue();
-		model.update((t) -> setPosition(t, x, y));
+		model.update(t -> setPosition(t, x, y));
 		return value;
 	}
 

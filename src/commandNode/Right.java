@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.Model;
 import model.Turtle;
-import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
@@ -23,14 +22,14 @@ public class Right extends GeneralCommand {
 	public double evaluate(List<NodeInterface> arguments)
 	{
 		double x = arguments.get(0).getValue();
-		model.update((y) -> right(y, x));
+		model.update(t -> right(t, x));
 		value = x;
 		return value;
 	}
 
 	public void right (Turtle t, double x) {
 		double deg = t.getDirectionAngle() - x;
-		if (deg < 0) deg = 360 + deg;
+		if (deg < 0) { deg = 360 + deg; }
 		t.setDirectionAngle(deg);
 	}
 }

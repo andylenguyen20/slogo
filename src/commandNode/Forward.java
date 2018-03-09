@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.Model;
 import model.Turtle;
-import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
@@ -37,7 +36,7 @@ public class Forward extends GeneralCommand {
 	public double evaluate(List<NodeInterface> arguments)
 	{
 		double x = arguments.get(0).getValue();
-		model.update((y) -> forward(y, x));
+		model.update(t -> forward(t, x));
 		value = x;
 		return value;
 	}

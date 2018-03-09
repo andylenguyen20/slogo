@@ -39,6 +39,7 @@ public class ListNode implements NodeInterface {
             return elements.get(index);
         }
         catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
             return null;
         }
     }

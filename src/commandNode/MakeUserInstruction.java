@@ -3,8 +3,9 @@ package commandNode;
 import java.util.List;
 
 import model.Model;
-import model.Turtle;
-import nodes.*;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
+import nodes.CustomCommand;
 
 public class MakeUserInstruction extends GeneralCommand  {
 
@@ -22,6 +23,7 @@ public class MakeUserInstruction extends GeneralCommand  {
 			return 1;
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			return 0;
 		}
 	}

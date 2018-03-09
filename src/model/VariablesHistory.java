@@ -1,8 +1,14 @@
 package model;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
-import nodes.*;
+import nodes.CustomCommand;
+import nodes.Variable;
 import view.Observer;
 
 /**
@@ -111,7 +117,7 @@ public class VariablesHistory implements VariableHistoryObservable, CustomComman
 
 	@Override
 	public Map<String,Double> getVariableMapCopy() {
-		Map<String, Double> shallowCopy = new HashMap<String,Double>();
+		Map<String, Double> shallowCopy = new HashMap<>();
 		shallowCopy.putAll(variables);
 		return shallowCopy;
 	}

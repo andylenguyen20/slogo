@@ -1,8 +1,10 @@
 package commandNode;
 
 import model.Model;
-import model.Turtle;
-import nodes.*;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
+import nodes.ListNode;
+import nodes.ImproperNodeException;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class Repeat extends GeneralCommand {
             return value;
         }
         catch (ClassCastException e) {
+            e.printStackTrace();
             throw new ImproperNodeException();
         }
     }

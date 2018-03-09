@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.Model;
 import model.Turtle;
-import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
@@ -34,7 +33,7 @@ public class Home extends GeneralCommand  {
 	 * @return the distance turtle moved
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		model.update((t) -> home(t));
+		model.update(t -> home(t));
 		return value;
 	}
 

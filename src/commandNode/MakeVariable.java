@@ -3,9 +3,11 @@ package commandNode;
 import java.util.List;
 
 import model.Model;
-import model.Turtle;
 import model.VariablesHistory;
-import nodes.*;
+import nodes.GeneralCommand;
+import nodes.ImproperNodeException;
+import nodes.NodeInterface;
+import nodes.Variable;
 
 /**
  * Makes a new variable as described on the course site
@@ -29,6 +31,7 @@ public class MakeVariable extends GeneralCommand {
 			return value;
 		}
 		catch (ClassCastException e) {
+			e.printStackTrace();
 			throw new ImproperNodeException();
 		}
 	}

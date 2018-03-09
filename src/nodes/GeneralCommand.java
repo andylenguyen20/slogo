@@ -2,7 +2,6 @@ package nodes;
 
 import java.util.ArrayList;
 
-import model.Turtle;
 import model.Model;
 
 /**

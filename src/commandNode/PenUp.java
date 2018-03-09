@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.Model;
 import model.Turtle;
-import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
@@ -22,7 +21,7 @@ public class PenUp extends GeneralCommand {
 	 */
 	public double evaluate(List<NodeInterface> arguments)
 	{
-		model.update((t) -> penUp(t));
+		model.update(t -> penUp(t));
 		value = 0;
 		return value;
 	}

@@ -6,7 +6,6 @@ import java.util.List;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
-import javafx.scene.shape.Shape;
 import nodes.NodeInterface;
 
 
@@ -45,7 +44,7 @@ public class Turtle implements TurtleObservable, NodeInterface
 		directionAngle = 90;
 		penShowing = true;
 		turtleShowing = true;
-		lines = new ArrayList<Line>();
+		lines = new ArrayList<>();
 		penColor = color;
 		penSize = 1.0;
 		this.ID = ID;

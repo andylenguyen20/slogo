@@ -5,7 +5,6 @@ import java.util.List;
 
 import model.Model;
 import model.Turtle;
-import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
@@ -39,7 +38,7 @@ public class Backward extends GeneralCommand
 	public double evaluate(List<NodeInterface> arguments)
 	{
 		double x = arguments.get(0).getValue();
-		model.update((y) -> backward(y, x));
+		model.update(t -> backward(t, x));
 		value = x;
 		return value;
 	}
