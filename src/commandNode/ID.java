@@ -22,10 +22,7 @@ public class ID extends GeneralCommand {
 	 * @return ID number of active turtle
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		for (Turtle turtle: model.getActiveTurtles())
-		{
-			value = turtle.getValue();
-		}
+		value = model.getActiveTurtle().getValue();
 		return value;
 	}
 

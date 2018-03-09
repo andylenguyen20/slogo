@@ -30,6 +30,7 @@ public class TreeMaker {
 						!(this.nodes.get(index) instanceof CommandInterface)) {
 					HeadInterface head = (HeadInterface) this.nodes.get(index);
 					heads.add(head); //add this head node to the head nodes which represent trees
+					index++;
 				}
 				else {
 					CommandInterface head = (CommandInterface) this.nodes.get(index);

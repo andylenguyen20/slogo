@@ -35,7 +35,12 @@ public class ListNode implements NodeInterface {
      * @return node at the given index
      */
     public NodeInterface getElement (int index) {
-        return elements.get(index);
+        try {
+            return elements.get(index);
+        }
+        catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 
     /**

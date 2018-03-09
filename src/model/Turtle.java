@@ -48,6 +48,8 @@ public class Turtle implements TurtleObservable, NodeInterface
 		lines = new ArrayList<Line>();
 		penColor = color;
 		penSize = 1.0;
+		this.ID = ID;
+		turtleShape = startShape;
 		toroidal = new WraparoundHandler(width, height);
 	}
 
@@ -73,7 +75,7 @@ public class Turtle implements TurtleObservable, NodeInterface
 		{
 			addLine(l);
 		}
-		
+
 		turtleObserver.notifyOfChanges();
 	}
 

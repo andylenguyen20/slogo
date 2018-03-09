@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,17 +21,21 @@ public class Model implements PaletteObservable, ModelObservable{
 	private static final String TURTLE_5 = "lt_arrow.png";
 	private static final String TURTLE_6 = "bk_arrow.png";
 
-
 	private Color backgroundColor;
 	private List<Color> colorOptions;
 	private List<String> shapeOptions;
 	private List<Turtle> activeTurtles;
 	private Map<Double,Turtle> allTurtles;
+
+	private static double XHome;
+	private static double YHome;
+
+	private int currentTurtle = 0;
+
 	private Observer colorIndexObserver;
 
 	public Model(double width, double height)
 	{
-		//needs actual colors
 		initializeColors();
 		initializeShapes();
 		activeTurtles = new ArrayList<>();
@@ -75,8 +80,10 @@ public class Model implements PaletteObservable, ModelObservable{
 		return allTurtles;
 	}
 
-	public void addTurtle(Turtle turt) {
-		allTurtles.put((double) turt.getValue(), turt);
+	public void addTurtle(double ID) {
+		Turtle t = new Turtle (XHome, YHome, Color.BLUE, ID, TURTLE_0);
+		allTurtles.put((double) t.getValue(), t);
+		activeTurtles.add(t);
 	}
 
 	public void addActiveTurtle(Turtle turt) {
@@ -116,10 +123,16 @@ public class Model implements PaletteObservable, ModelObservable{
 		return activeTurtles;
 	}
 
+	public void setActiveTurtles(List<Turtle> newActives) {
+		activeTurtles = newActives;
+	}
+
 	public void update (Consumer<Turtle> T) {
 		for (Turtle t: getActiveTurtles()) {
 			T.accept(t);
+			currentTurtle++;
 		}
+		currentTurtle = 0;
 	}
 
 
