@@ -5,7 +5,6 @@ import java.util.List;
 
 import model.Model;
 import model.Turtle;
-import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
@@ -35,7 +34,7 @@ public class ClearScreen extends GeneralCommand  {
 	 * @return the distance the turtle moved
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		model.update((t) -> clearScreen(t));
+		model.update(t -> clearScreen(t));
 		return value;
 	}
 

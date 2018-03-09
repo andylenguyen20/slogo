@@ -1,6 +1,5 @@
 package commandNode;
 
-import javafx.scene.paint.Color;
 import model.Model;
 import model.Turtle;
 import nodes.GeneralCommand;
@@ -8,7 +7,6 @@ import nodes.NodeInterface;
 import nodes.ListNode;
 
 import java.util.List;
-import java.util.ArrayList;
 
 public class Tell extends GeneralCommand {
 
@@ -26,7 +24,7 @@ public class Tell extends GeneralCommand {
             value = node.getValue();
             if (model.getAllTurtles().containsKey(value)) {
                 Turtle t = model.getAllTurtles().get(value);
-                if (!model.getActiveTurtles().contains(t)) model.addActiveTurtle(t);
+                if (!model.getActiveTurtles().contains(t)) { model.addActiveTurtle(t); }
             }
             else {
                 model.addTurtle(value);

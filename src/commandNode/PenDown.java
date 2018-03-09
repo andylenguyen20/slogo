@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.Model;
 import model.Turtle;
-import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
@@ -35,7 +34,7 @@ public class PenDown extends GeneralCommand {
 	 */
 	public double evaluate(List<NodeInterface> arguments)
 	{
-		model.update((t) -> penDown(t));
+		model.update(t -> penDown(t));
 		value = 1;
 		return value;
 	}

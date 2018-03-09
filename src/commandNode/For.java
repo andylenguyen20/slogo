@@ -3,8 +3,12 @@ package commandNode;
 import java.util.List;
 
 import model.Model;
-import model.Turtle;
-import nodes.*;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
+import nodes.ListNode;
+import nodes.Variable;
+import nodes.Constant;
+import nodes.ImproperNodeException;
 
 /**
  * Implements FOR as described on the course site
@@ -35,6 +39,7 @@ public class For extends GeneralCommand  {
 			return value;
 		}
 		catch (ClassCastException e) {
+			e.printStackTrace();
 			throw new ImproperNodeException();
 		}
 	}

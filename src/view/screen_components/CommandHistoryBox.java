@@ -22,20 +22,25 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 		super();
 	}
 
-	private CommandHistoryBoxController controller;
+	private ParserActionDelegate parserActionDelegate;
+	private ClearValueDelegate clearValueDelegate;
 
-	public void setController(CommandHistoryBoxController controller){
-		this.controller = controller;
+
+	public void setParserActionDelegate(ParserActionDelegate parserActionDelegate){
+		this.parserActionDelegate = parserActionDelegate;
 	}
 
 	public void setCommandHistory(CommandHistory commandHistory){
 		this.commandHistory = commandHistory;
 	}
+	public void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
+		this.clearValueDelegate = clearValueDelegate;
+	}
 
 	@Override
 	protected void mapUserActions() {
 		clearButton.setOnAction((event -> {
-			controller.clearCommandHistoryBox();
+			clearValueDelegate.clear();
 		}));
 	}
 
@@ -67,7 +72,7 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 			Button commandButton = new Button(command);
 			commandButton.getStyleClass().add("runnableCommandButton");
 			commandButton.setOnAction((event -> {
-				controller.passCommand(commandButton.getText());
+				parserActionDelegate.performParserAction((p)->p.parseString(commandButton.getText()));
 			}));
 			commandList.getChildren().add(commandButton);
 		}

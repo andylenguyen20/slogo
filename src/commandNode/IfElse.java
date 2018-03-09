@@ -3,8 +3,10 @@ package commandNode;
 import java.util.List;
 
 import model.Model;
-import model.Turtle;
-import nodes.*;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
+import nodes.ListNode;
+import nodes.ImproperNodeException;
 
 /**
  * @author Belanie Nagiel
@@ -48,6 +50,7 @@ public class IfElse extends GeneralCommand {
 			return value;
 		}
 		catch (ClassCastException e) {
+			e.printStackTrace();
 			throw new ImproperNodeException();
 		}
 	}

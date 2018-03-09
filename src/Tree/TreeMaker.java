@@ -4,7 +4,9 @@ package Tree;
 import java.util.ArrayList;
 import java.util.List;
 
-import nodes.*;
+import nodes.NodeInterface;
+import nodes.HeadInterface;
+import nodes.CommandInterface;
 
 /**
  * This is the class that makes the tree of nodes. The tree uses the fact that each node
@@ -38,6 +40,7 @@ public class TreeMaker {
 				}
 			}
 			catch (ClassCastException e) {
+				e.printStackTrace();
 				throw new HeadException(); //cannot have a head of tree that is node a head node
 			}
 		}
@@ -69,6 +72,7 @@ public class TreeMaker {
 				}
 			}
 			catch (IndexOutOfBoundsException e) {
+				e.printStackTrace();
 				throw new NodeArgumentException(); //if a child is expected but nothing there throws error
 			}
 		}

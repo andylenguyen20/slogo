@@ -1,10 +1,8 @@
 package commandNode;
 
 import model.Model;
-import model.Turtle;
 import java.util.List;
 
-import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 /**

@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.Model;
 import model.Turtle;
-import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
@@ -34,7 +33,7 @@ public class Heading extends GeneralCommand {
 	 * @return turtle's direction angle
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		model.update((t) -> heading(t));
+		model.update(t -> heading(t));
 		return value;
 	}
 

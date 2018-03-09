@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import model.ColorIndexObservable;
+import model.PaletteObservable;
 import view.Observer;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class Palette extends ScreenComponent implements Observer{
     public static final int VBOX_SPACING = 10;
     private VBox vBox;
 
-    private ColorIndexObservable colorIndex;
+    private PaletteObservable colorIndex;
 
     public Palette(){
         super();
@@ -34,7 +34,7 @@ public class Palette extends ScreenComponent implements Observer{
 
     }
 
-    public void setColorIndex(ColorIndexObservable colorIndex){
+    public void setColorIndex(PaletteObservable colorIndex){
         this.colorIndex = colorIndex;
     }
 

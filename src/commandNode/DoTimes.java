@@ -3,7 +3,12 @@ package commandNode;
 import java.util.List;
 
 import model.Model;
-import nodes.*;
+import nodes.GeneralCommand;
+import nodes.NodeInterface;
+import nodes.ListNode;
+import nodes.Variable;
+import nodes.Constant;
+import nodes.ImproperNodeException;
 
 
 public class DoTimes extends GeneralCommand {
@@ -42,6 +47,7 @@ public class DoTimes extends GeneralCommand {
 			return value;
 		}
 		catch (ClassCastException e) {
+			e.printStackTrace();
 			throw new ImproperNodeException();
 		}
 	}

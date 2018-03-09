@@ -34,13 +34,13 @@ public class IsShowing extends GeneralCommand {
 	 * @return turtle's visibility status
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		model.update((t) -> isShowing(t));
+		model.update(t -> isShowing(t));
 		return value;
 	}
 
 	public void isShowing (Turtle t) {
-		if(t.getTurtleShowing()) value = 1;
-		else value = 0;
+		if(t.getTurtleShowing()) { value = 1; }
+		else { value = 0; }
 	}
 
 }

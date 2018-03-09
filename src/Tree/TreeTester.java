@@ -1,4 +1,4 @@
-package Tree;
+/**package Tree;
 
 import java.util.ArrayList;
 
@@ -46,5 +46,5 @@ public class TreeTester {
 		TreeEvaluator te = new TreeEvaluator();
 		System.out.println(te.evaluate(heads));
 	}
-}
+}**/
 

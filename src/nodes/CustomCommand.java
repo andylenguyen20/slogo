@@ -47,6 +47,7 @@ public class CustomCommand extends Variables implements HeadInterface, NodeInter
             lists.add(l);
         }
         catch (ClassCastException e) {
+            e.printStackTrace();
             throw new ImproperNodeException(); //catches when a non list node is attempted to be added
         }
     }

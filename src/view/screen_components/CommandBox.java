@@ -1,8 +1,6 @@
 package view.screen_components;
 
-import controller.CommandBoxController;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import controller.ParserActionDelegate;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -19,31 +17,21 @@ public class CommandBox extends ScreenComponent{
     private TextArea commandTextArea;
     private Label commandLabel;
     private ComboBox<String> languageBox;
-    private CommandBoxController controller;
+    private ParserActionDelegate parserActionDelegate;
 
 	public CommandBox() {
 		super();
 	}
 
-	public void setController(CommandBoxController controller){
-		this.controller = controller;
+	public void setController(ParserActionDelegate parserActionDelegate){
+		this.parserActionDelegate = parserActionDelegate;
 	}
 
 	@Override
 	protected void mapUserActions() {
-		commandClearButton.setOnAction((event -> {
-			commandTextArea.clear();
-		}));
-		commandRunButton.setOnAction((event -> {
-			controller.passCommand(commandTextArea.getText().trim());
-			commandTextArea.clear();
-		}));
-		languageBox.valueProperty().addListener(new ChangeListener<Object>() {
-			@Override
-			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				changeLanguage();
-			}
-		});
+		commandClearButton.setOnAction((e) -> commandTextArea.clear());
+		commandRunButton.setOnAction((e)->this.runCommand());
+		languageBox.valueProperty().addListener((x,y,z)-> this.changeLanguage());
 	}
 
 	public void generateGUIComponent(){
@@ -82,8 +70,12 @@ public class CommandBox extends ScreenComponent{
 		return languageBox;
 	}
 
+	private void runCommand(){
+		parserActionDelegate.performParserAction((p)->p.parseString(commandTextArea.getText().trim()));
+		commandTextArea.clear();
+	}
 	private void changeLanguage(){
-		controller.changeLanguage(languageBox.getValue());
+		parserActionDelegate.performParserAction((p)->p.setLanguage(languageBox.getValue()));
 	}
 
 }

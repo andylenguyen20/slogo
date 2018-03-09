@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.Model;
 import model.Turtle;
-import nodes.CommandInterface;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
@@ -27,9 +26,9 @@ public class SetTowards extends GeneralCommand
 		double y = arguments.get(1).getValue();
 		double rad = Math.atan(y/x);
 		double deg = rad * degreeConversion; 
-		if( x < 0) deg = 180 + deg;
+		if( x < 0) { deg = 180 + deg; }
 		double finalDeg = deg;
-		model.update((t) -> setTowards(t, finalDeg));
+		model.update(t -> setTowards(t, finalDeg));
 		return value;
 	}
 
