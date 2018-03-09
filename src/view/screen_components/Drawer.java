@@ -18,16 +18,14 @@ import view.constants.ComboBoxConstants;
 public class Drawer extends ScreenComponent implements Observer{
     public static final double CANVAS_WIDTH = CanvasConstants.CANVAS_WIDTH;
     public static final double CANVAS_HEIGHT = CanvasConstants.CANVAS_HEIGHT;
-    public static final Color INITIAL_PEN_COLOR = Color.BLACK;
-	public static final double TURTLE_START_X = CanvasConstants.CANVAS_WIDTH/2;
-	public static final double TURTLE_START_Y = CanvasConstants.CANVAS_HEIGHT/2;
+	private static final int VERTICAL_INSET = 10;
+	private static final int HORIZONTAL_INSET = 20;
 
 	//other turtle images taken from:
 	// https://pixabay.com/en/turtle-animal-reptile-water-green-294522/
 	// https://pixabay.com/en/sea-turtle-floral-flowers-2952470/
 
 	private DrawerCanvas drawerCanvas;
-	private GraphicsContext gc;
 	private ComboBox<String> backgroundColorBox;
 	private ComboBox<String> penColorBox;
 	private ComboBox<String> turtleImageBox;
@@ -54,29 +52,14 @@ public class Drawer extends ScreenComponent implements Observer{
 
 	@Override
 	protected void mapUserActions() {
-		backgroundColorBox.valueProperty().addListener(new ChangeListener<Object>() {
-			@Override
-			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				changeBackgroundColor();
-			}
-		});
-		turtleImageBox.valueProperty().addListener(new ChangeListener<Object>() {
-			@Override
-			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				changeTurtleImage();
-			}
-		});
-		penColorBox.valueProperty().addListener(new ChangeListener<Object>() {
-			@Override
-			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				changePenColor();
-			}
-		});
+		backgroundColorBox.valueProperty().addListener((observable, oldValue, newValue) -> changeBackgroundColor());
+		turtleImageBox.valueProperty().addListener((observable, oldValue, newValue) -> changeTurtleImage());
+		penColorBox.valueProperty().addListener((observable, oldValue, newValue) -> changePenColor());
 	}
 
 	public void generateGUIComponent(){
 		BorderPane borderPane = super.getBorderPane();
-		borderPane.setPadding(new Insets(10,20,10,20));
+		borderPane.setPadding(new Insets(VERTICAL_INSET, HORIZONTAL_INSET, VERTICAL_INSET, HORIZONTAL_INSET));
 		drawerCanvas = new DrawerCanvas(borderPane, turtle);
 		generateBorderPaneBottom(borderPane);
 	}
@@ -102,32 +85,17 @@ public class Drawer extends ScreenComponent implements Observer{
 
 	private void changeBackgroundColor(){
 		String color = backgroundColorBox.getValue();
-		switch (color){
-			case "White": paletteDelegate.changeBackgroundColor(Color.WHITE);
-			case "Blue": paletteDelegate.changeBackgroundColor(Color.BLUE);
-		}
+		drawerCanvas.changeBackgroundColor(color);
 		update();
 	}
 
-
 	private void changePenColor(){
-		String color = (String) penColorBox.getValue();
-		Color penColor = null;
-		if (color.equals("Red")) {
-			penColor = Color.RED;
-		}
-		if (color.equals("Green")){
-			penColor = Color.GREEN;
-		}
-		if(color.equals("Black")){
-			penColor = Color.BLACK;
-		}
-		paletteDelegate.changePenColor(penColor);
+		controller.setPenColor(Color.valueOf(penColorBox.getValue()));
 	}
 
 	private void changeTurtleImage(){
-		String imageName = (String) turtleImageBox.getValue();
-		paletteDelegate.changeTurtleImage(imageName);
+		String imageName = turtleImageBox.getValue();
+		drawerCanvas.changeTurtleImage(imageName);
 		update();
 	}
 
@@ -135,7 +103,6 @@ public class Drawer extends ScreenComponent implements Observer{
 	public void update(){
 		drawerCanvas.update();
 	}
-
 
 	@Override
 	public void notifyOfChanges() {

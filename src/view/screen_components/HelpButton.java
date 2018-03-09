@@ -3,7 +3,6 @@ package view.screen_components;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import propertiesFiles.ResourceBundleManager;
-import view.constants.ButtonConstants;
 import view.help_items.HelpPopup;
 
 public class HelpButton extends ScreenComponent{

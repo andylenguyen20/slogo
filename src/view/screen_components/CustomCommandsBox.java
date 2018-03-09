@@ -1,6 +1,6 @@
 package view.screen_components;
 
-import controller.*;
+import controller.CustomCommandController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -13,6 +13,8 @@ import view.Observer;
 import java.util.List;
 
 public class CustomCommandsBox extends ScreenComponent implements Observer {
+    public static final int SCROLLPANE_WIDTH = 200;
+    public static final int SCROLLPANE_HEIGHT = 100;
     private CustomCommandObservable customCommandHolder;
     private Button clearButton;
     private VBox commandList;
@@ -36,8 +38,8 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
         borderPane.setTop(topComponent);
         commandList = new VBox();
         ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setMaxWidth(200);
-        scrollPane.setPrefHeight(100);
+        scrollPane.setMaxWidth(SCROLLPANE_WIDTH);
+        scrollPane.setPrefHeight(SCROLLPANE_HEIGHT);
         scrollPane.setContent(commandList);
         borderPane.setCenter(scrollPane);
     }

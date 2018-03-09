@@ -37,6 +37,10 @@ public class TurtleInformation {
         helpStage.show();
     };
 
+    public void showTurtleInformation(){
+        helpStage.show();
+    }
+
     private void addInfo(){
         vBox = new VBox();
         Label idLabel = new Label("Turtle ID: ");

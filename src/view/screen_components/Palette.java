@@ -20,6 +20,7 @@ public class Palette extends ScreenComponent implements Observer{
     public static final int RECT_WIDTH = 60;
     public static final int RECT_HEIGHT = 20;
     public static final String PALETTE_TITLE = "Color and Image Palette";
+    public static final int VBOX_SPACING = 10;
     private VBox vBox;
 
     private PaletteObservable colorIndex;
@@ -46,8 +47,8 @@ public class Palette extends ScreenComponent implements Observer{
     private void generateVBox(BorderPane borderPane){
 
         vBox = new VBox();
-        vBox.setPadding(new Insets(10,10,10,10));
-        vBox.setSpacing(10);
+        vBox.setPadding(new Insets(VBOX_SPACING, VBOX_SPACING, VBOX_SPACING, VBOX_SPACING));
+        vBox.setSpacing(VBOX_SPACING);
         Label title2 = new Label(PALETTE_TITLE);
         borderPane.setTop(title2);
         BorderPane.setAlignment(title2, Pos.CENTER);

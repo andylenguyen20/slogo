@@ -1,7 +1,6 @@
 package view.screen_components;
 
-import controller.ClearValueDelegate;
-import controller.ParserActionDelegate;
+import controller.CommandHistoryBoxController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;

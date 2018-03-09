@@ -14,6 +14,8 @@ import view.constants.TextAreaConstants;
 import java.util.Map;
 
 public class VariableHistoryBox extends ScreenComponent implements Observer {
+	public static final int TEXTAREA_ROWS = 10;
+	public static final int EDITVALUEFIELD_WIDTH = 30;
 	private VariableHistoryObservable variableHistory;
 	private ClearValueDelegate clearValueDelegate;
 	private ValueModifierDelegate valueModifierDelegate;
@@ -78,9 +80,9 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 		variableComboBox = new ComboBox<>();
 		bottomComponent.getChildren().add(variableComboBox);
 		editValueField = new TextField();
-		editValueField.setMaxWidth(30);
+		editValueField.setMaxWidth(EDITVALUEFIELD_WIDTH);
 		bottomComponent.getChildren().add(editValueField);
-		submitButton = new Button("Submit");
+		submitButton = new Button(ResourceBundleManager.retrieveButtonLabel("SUBMIT"));
 		bottomComponent.getChildren().add(submitButton);
 		borderPane.setBottom(bottomComponent);
 	}
@@ -89,7 +91,7 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 	private void addTextArea(BorderPane borderPane){
 		textArea = new TextArea();
 		textArea.setEditable(false);
-		textArea.setPrefRowCount(10);
+		textArea.setPrefRowCount(TEXTAREA_ROWS);
 		textArea.setPrefColumnCount(TextAreaConstants.VARIABLE_COLUMNS);
 		borderPane.setCenter(textArea);
 	}
