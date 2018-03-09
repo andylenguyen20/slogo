@@ -28,19 +28,19 @@ public class PenControlPanel extends ScreenComponent{
     @Override
     protected void mapUserActions() {
         penUpButton.setOnAction((event -> {
-            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString(ResourceBundleManager.retrieveOnScreenCommand("PENUP"))));
+            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("PENUP"))));
         }));
         penDownButton.setOnAction((event -> {
-            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString(ResourceBundleManager.retrieveOnScreenCommand("PENDOWN"))));
+            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("PENDOWN"))));
         }));
         smallPenButton.setOnAction((event -> {
-            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString(ResourceBundleManager.retrieveOnScreenCommand("SMALL_FONT"))));
+            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("SMALL_FONT"))));
         }));
         medPenButton.setOnAction((event -> {
-            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString(ResourceBundleManager.retrieveOnScreenCommand("MED_FONT"))));
+            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("MED_FONT"))));
         }));
         largePenButton.setOnAction((event -> {
-            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString(ResourceBundleManager.retrieveOnScreenCommand("LARGE_FONT"))));
+            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("LARGE_FONT"))));
         }));
     }
 

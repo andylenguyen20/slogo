@@ -2,6 +2,7 @@ package view.screen_components;
 
 import Experiment.TheClearValueDelegate;
 import Experiment.TheParserActionDelegate;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -10,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.CustomCommandObservable;
 import view.Observer;
+import view.help_items.HelpPopup;
 
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     public static final int SCROLLPANE_HEIGHT = 100;
     private CustomCommandObservable customCommandHolder;
     private Button clearButton;
+    private Button helpButton;
     private VBox commandList;
 
     private TheParserActionDelegate theParserActionDelegate;
@@ -34,6 +37,7 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     private void addButtonAndLabels(BorderPane borderPane) {
         HBox topComponent = new HBox();
         clearButton = new Button("Clear");
+        helpButton = new Button("Help");
         Label label = new Label("Custom Commands");
         topComponent.getChildren().add(label);
         topComponent.getChildren().add(clearButton);
@@ -44,6 +48,9 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
         scrollPane.setPrefHeight(SCROLLPANE_HEIGHT);
         scrollPane.setContent(commandList);
         borderPane.setCenter(scrollPane);
+        borderPane.setBottom(helpButton);
+        BorderPane.setAlignment(helpButton, Pos.BOTTOM_RIGHT);
+
     }
 
     public void setCustomCommandHolder(CustomCommandObservable holder){
@@ -68,6 +75,10 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     protected void mapUserActions() {
         clearButton.setOnAction((event -> {
             theClearValueDelegate.clear();
+        }));
+        helpButton.setOnAction((event -> {
+            HelpPopup popup = new HelpPopup();
+            popup.open();
         }));
     }
 

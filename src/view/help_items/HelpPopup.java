@@ -37,6 +37,9 @@ public class HelpPopup {
         addSecondButtonRow();
         addTitle();
         setButtonActions();
+    }
+
+    public void open(){
         helpStage.show();
     }
 

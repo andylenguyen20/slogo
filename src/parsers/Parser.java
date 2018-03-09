@@ -16,6 +16,7 @@ import model.VariablesHistory;
 import model.CommandHistory;
 import model.Model;
 import nodes.*;
+import propertiesFiles.ResourceBundleManager;
 
 /**
  * @author Belanie Nagiel
@@ -129,8 +130,7 @@ public class Parser
 	public List<NodeInterface> parseString(String command, String language)
 	{
 		String oldLanguage = lang;
-		
-		setLanguage(language);
+		setLanguage(ResourceBundleManager.retrieveOnScreenCommand(language));
 		
 		List<NodeInterface> fromButton = parseString(command);
 		
@@ -139,6 +139,17 @@ public class Parser
 		return fromButton;
 		
 	}
+
+	public List<NodeInterface> parseActionCommand(String command)
+	{
+		String oldLanguage = lang;
+		setLanguage(ResourceBundleManager.retrieveOnScreenCommand("DEFAULT_LANGUAGE"));
+		List<NodeInterface> fromButton = parseString(command);
+		setLanguage(oldLanguage);
+		return fromButton;
+
+	}
+
 	
 	public void makeTree(List<NodeInterface> nodeList)
 	{

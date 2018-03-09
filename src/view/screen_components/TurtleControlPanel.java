@@ -5,11 +5,15 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import propertiesFiles.ResourceBundleManager;
 
 
 public class TurtleControlPanel extends ScreenComponent {
-    private static final double STEP_SIZE = 50;
-    private static final double TURN_SIZE = 20;
+
+    private static final String FD_BUTTON = "fdButton";
+    private static final String BK_BUTTON = "bkButton";
+    private static final String LT_BUTTON = "ltButton";
+    private static final String RT_BUTTON = "rtButton";
     private TheParserActionDelegate theParserActionDelegate;
     private Button forwardButton;
     private Button backwardButton;
@@ -23,16 +27,16 @@ public class TurtleControlPanel extends ScreenComponent {
     @Override
     protected void mapUserActions() {
         forwardButton.setOnAction((event -> {
-            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString("fd 50")));
+            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("FORWARD"))));
         }));
         backwardButton.setOnAction((event -> {
-            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString("bk 50")));
+            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("BACKWARD"))));
         }));
         rightTurnButton.setOnAction((event -> {
-            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString("rt 50")));
+            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("RIGHT"))));
         }));
         leftTurnButton.setOnAction((event -> {
-            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseString("lt 50")));
+            theParserActionDelegate.performParserAction(parser -> parser.makeTree(parser.parseActionCommand(ResourceBundleManager.retrieveOnScreenCommand("LEFT"))));
         }));
     }
 
@@ -40,13 +44,13 @@ public class TurtleControlPanel extends ScreenComponent {
     public void generateGUIComponent() {
         BorderPane borderPane = super.getBorderPane();
         forwardButton = new Button();
-        forwardButton.getStyleClass().add("fdButton");
+        forwardButton.getStyleClass().add(FD_BUTTON);
         backwardButton = new Button();
-        backwardButton.getStyleClass().add("bkButton");
+        backwardButton.getStyleClass().add(BK_BUTTON);
         leftTurnButton = new Button();
-        leftTurnButton.getStyleClass().add("ltButton");
+        leftTurnButton.getStyleClass().add(LT_BUTTON);
         rightTurnButton = new Button();
-        rightTurnButton.getStyleClass().add("rtButton");
+        rightTurnButton.getStyleClass().add(RT_BUTTON);
         VBox vbox = new VBox();
         HBox topPanel = new HBox();
         topPanel.getChildren().add(backwardButton);

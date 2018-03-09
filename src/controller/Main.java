@@ -3,7 +3,6 @@ package controller;
 import Experiment.TheWorkspace;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.ModelInterface;
 
 public class Main extends Application{
 
