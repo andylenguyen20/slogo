@@ -31,7 +31,7 @@ public class VariablesHistory implements VariableHistoryObservable, CustomComman
 	 * Adds an observer to the program
 	 * @param variableHistoryObserver the observer
 	 */
-	public void addObserver(Observer variableHistoryObserver){
+	public void addVariableHistoryObserver(Observer variableHistoryObserver){
 		this.variableHistoryObserver = variableHistoryObserver;
 	}
 

@@ -19,6 +19,7 @@ import view.screen_components.*;
 public class Controller implements CommandBoxController, DrawerController, CommandHistoryBoxController,
 						VariableHistoryBoxController, TurtleControlPanelController, CustomCommandController,
 						PenPanelController{
+
 	private GUI gui;
 	private Parser parser;
 	private CommandHistory commandHistory;
@@ -51,25 +52,28 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 	}
 
 	private void setUpConnections(){
+		/*
 		for (Turtle turtle: model.getActiveTurtles())
 		{
-			turtle.addObserver(drawer);
+			turtle.addVariableHistoryObserver(drawer);
 			drawer.setTurtle(turtle);
 			drawer.update();
 		}
-		model.addObserver(palette);
+		model.addVariableHistoryObserver(palette);
 		palette.setColorIndex(model);
 		model.initializePalette();
 		variableHistoryBox.setVariableHistory(variableHistory);
 		commandHistoryBox.setCommandHistory(commandHistory);
-		commandHistory.addObserver(commandHistoryBox);
+		commandHistory.addVariableHistoryObserver(commandHistoryBox);
 		variableHistoryBox.setVariableHistory(variableHistory);
-		variableHistory.addObserver(variableHistoryBox);
+		variableHistory.addVariableHistoryObserver(variableHistoryBox);
 		variableHistory.addCustomCommandObserver(customCommandsBox);
 		customCommandsBox.setCustomCommandHolder(variableHistory);
+		*/
 	}
 
 	private void initializeScreenComponents(){
+		/*
 		palette = new Palette();
 		drawer = new Drawer();
 		drawer.setController(this);
@@ -86,6 +90,7 @@ public class Controller implements CommandBoxController, DrawerController, Comma
 		customCommandsBox.setController(this);
 		penControlPanel = new PenControlPanel();
 		penControlPanel.setController(this);
+		*/
 	}
 
 	private void addToGUI(){

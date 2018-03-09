@@ -1,6 +1,6 @@
 package view.screen_components;
 
-import controller.DrawerController;
+import controller.PaletteDelegate;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -9,7 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import model.Turtle;
+import model.ModelObservable;
 import model.TurtleObservable;
 import view.Observer;
 import view.constants.CanvasConstants;
@@ -31,16 +31,21 @@ public class Drawer extends ScreenComponent implements Observer{
 	private ComboBox<String> backgroundColorBox;
 	private ComboBox<String> penColorBox;
 	private ComboBox<String> turtleImageBox;
+
+	private PaletteDelegate paletteDelegate;
+	private ModelObservable model;
 	private TurtleObservable turtle;
 	private HBox hbox;
-	private DrawerController controller;
 	public Drawer(){
 		super();
 	}
 
-	public void setController(DrawerController controller){
-		this.controller = controller;
-		drawerCanvas.setController(controller);
+	public void setModelObservable(ModelObservable model){
+		this.model = model;
+	}
+
+	public void setPaletteDelegate(PaletteDelegate paletteDelegate){
+		this.paletteDelegate = paletteDelegate;
 	}
 
 	public void setTurtle(TurtleObservable turtle){
@@ -96,8 +101,11 @@ public class Drawer extends ScreenComponent implements Observer{
 	}
 
 	private void changeBackgroundColor(){
-		String color = (String) backgroundColorBox.getValue();
-		drawerCanvas.changeBackgroundColor(color);
+		String color = backgroundColorBox.getValue();
+		switch (color){
+			case "White": paletteDelegate.changeBackgroundColor(Color.WHITE);
+			case "Blue": paletteDelegate.changeBackgroundColor(Color.BLUE);
+		}
 		update();
 	}
 
@@ -114,19 +122,17 @@ public class Drawer extends ScreenComponent implements Observer{
 		if(color.equals("Black")){
 			penColor = Color.BLACK;
 		}
-		controller.setPenColor(penColor);
+		paletteDelegate.changePenColor(penColor);
 	}
 
 	private void changeTurtleImage(){
 		String imageName = (String) turtleImageBox.getValue();
-		drawerCanvas.changeTurtleImage(imageName);
+		paletteDelegate.changeTurtleImage(imageName);
 		update();
 	}
 
 
 	public void update(){
-		drawerCanvas.setTurtle(turtle);
-		drawerCanvas.changeTurtleImage(turtle.getTurtleShape());
 		drawerCanvas.update();
 	}
 
