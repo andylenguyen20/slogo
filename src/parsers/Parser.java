@@ -51,6 +51,7 @@ public class Parser
 	 */
 	public Parser(Model m, VariablesHistory VH, CommandHistory CH)
 	{
+		System.out.println(VH.hashCode());
 		myTranslation = new HashMap<>();
 
 		regex = new HashMap<>();
@@ -106,6 +107,7 @@ public class Parser
 	
 	public List<NodeInterface> parseString(String command)
 	{
+		System.out.println("hi");
 		languageFilePath = "resources.languages/" + lang;
 		addResources(languageFilePath, myTranslation);
 

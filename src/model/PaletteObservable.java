@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
-public interface ColorIndexObservable {
+public interface PaletteObservable {
     public List<Color> getColorList();
     public List<String> getShapeOptions();
 }

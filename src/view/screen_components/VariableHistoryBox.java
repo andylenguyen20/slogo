@@ -1,21 +1,22 @@
 package view.screen_components;
 
-import controller.VariableHistoryBoxController;
+import controller.ClearValueDelegate;
+import controller.ValueModifierDelegate;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import model.VariableHistoryObservable;
+import model.VariablesHistory;
 import propertiesFiles.ResourceBundleManager;
 import view.Observer;
-import view.constants.ButtonConstants;
-import view.constants.LabelConstants;
 import view.constants.TextAreaConstants;
 
 import java.util.Map;
 
 public class VariableHistoryBox extends ScreenComponent implements Observer {
 	private VariableHistoryObservable variableHistory;
-	private VariableHistoryBoxController controller;
+	private ClearValueDelegate clearValueDelegate;
+	private ValueModifierDelegate valueModifierDelegate;
 	private TextArea textArea;
 	private Button clearButton;
 	private Button submitButton;
@@ -25,21 +26,20 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 		super();
 	}
 
-	public void setController(VariableHistoryBoxController controller){
-		this.controller = controller;
-	}
-
-	public void setVariableHistory(VariableHistoryObservable variableHistory){
+	public void setVariableHistory(VariablesHistory variableHistory){
 		this.variableHistory = variableHistory;
 	}
+
+	public void setClearValueDelegate(ClearValueDelegate clearValueDelegate){ this.clearValueDelegate = clearValueDelegate; }
+	public void setValueModifierDelegate(ValueModifierDelegate valueModifierDelegate){ this.valueModifierDelegate = valueModifierDelegate; }
 
 	@Override
 	protected void mapUserActions() {
 		clearButton.setOnAction((event -> {
-			controller.clearVariableBox();
+			clearValueDelegate.clear();
 		}));
 		submitButton.setOnAction((event -> {
-			controller.changeVariableValue(variableComboBox.getValue(), editValueField.getText());
+			valueModifierDelegate.changeValue(editValueField.getText(), variableComboBox.getValue());
 		}));
 	}
 
@@ -96,6 +96,7 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 
 	@Override
 	public void notifyOfChanges() {
+		System.out.println("wowza");
 		this.fillBox(variableHistory.getVariableMapCopy());
 	}
 }
