@@ -1,6 +1,6 @@
 package view.screen_components;
 
-import Experiment.ParserActionDelegate;
+import controller.ParserActionDelegate;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ComboBox;

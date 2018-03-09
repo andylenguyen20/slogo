@@ -1,4 +1,4 @@
-package Experiment;
+package controller;
 
 import parsers.Parser;
 import view.GUI;

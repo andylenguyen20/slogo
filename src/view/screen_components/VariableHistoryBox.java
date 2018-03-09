@@ -1,7 +1,7 @@
 package view.screen_components;
 
-import Experiment.ClearValueDelegate;
-import Experiment.ValueModifierDelegate;
+import controller.ClearValueDelegate;
+import controller.ValueModifierDelegate;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;

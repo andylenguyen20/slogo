@@ -1,4 +1,4 @@
-package Experiment;
+package controller;
 
 import model.VariablesHistory;
 import parsers.Parser;

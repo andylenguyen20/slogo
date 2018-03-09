@@ -1,5 +1,6 @@
-package Experiment;
+package controller;
 
+import controller.Controller;
 import model.Model;
 import view.GUI;
 import view.screen_components.Palette;

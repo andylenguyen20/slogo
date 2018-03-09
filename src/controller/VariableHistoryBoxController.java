@@ -1,6 +1,9 @@
-package Experiment;
+package controller;
 
 
+import controller.ClearValueDelegate;
+import controller.Controller;
+import controller.ValueModifierDelegate;
 import model.VariablesHistory;
 import view.GUI;
 import view.screen_components.VariableHistoryBox;

@@ -1,5 +1,6 @@
-package Experiment;
+package controller;
 
+import controller.*;
 import javafx.stage.Stage;
 import model.CommandHistory;
 import model.Model;

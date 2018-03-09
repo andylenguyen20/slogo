@@ -1,6 +1,5 @@
 package controller;
 
-import Experiment.Workspace;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

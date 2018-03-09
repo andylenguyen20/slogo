@@ -1,7 +1,7 @@
 package view.screen_components;
 
-import Experiment.ClearValueDelegate;
-import Experiment.ParserActionDelegate;
+import controller.ClearValueDelegate;
+import controller.ParserActionDelegate;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;

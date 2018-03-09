@@ -1,4 +1,4 @@
-package Experiment;
+package controller;
 
 import model.Model;
 import parsers.Parser;
