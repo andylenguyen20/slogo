@@ -13,6 +13,6 @@ public interface TurtleObservable {
     List<Line> getLines();
     boolean getTurtleShowing();
     String getTurtleShape();
-    boolean getTurtleStatus();
+    //boolean getTurtleStatus();
     double getID();
 }

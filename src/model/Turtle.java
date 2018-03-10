@@ -29,7 +29,7 @@ public class Turtle implements TurtleObservable, NodeInterface
 	private boolean turtleShowing;
 	private Color penColor;
 	private double penSize;
-	private boolean activeStatus;
+	//private boolean activeStatus;
 
 	
 	private WraparoundHandler toroidal;
@@ -64,12 +64,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 		turtleShape = startShape;
 		toroidal = new WraparoundHandler(width, height);
 	}
-
-	public void addObserver(Observer turtleObserver){
-		//System.out.println("hi");
-		this.turtleObserver = turtleObserver;
-	}
-
 	/**
 	 *
 	 * @return the current x coordinate
@@ -252,15 +246,16 @@ public class Turtle implements TurtleObservable, NodeInterface
 		return ID;
 	}
 
-	public void setTurtleStatus(boolean active) {
+
+	/** public void setTurtleStatus(boolean active) {
 		this.activeStatus = active;
-	}
-	
-	@Override
+	} **/
+
+	//@Override
 	/**
 	 * @return whether or not the turtle is active
 	 */
-	public boolean getTurtleStatus() {
+	/** public boolean getTurtleStatus() {
 		return activeStatus;
-	}
+	} **/
 }

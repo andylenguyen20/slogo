@@ -34,7 +34,7 @@ public class TurtleInformationPanel extends ScreenComponent{
         turtleInfoPanel.clear();
         turtleInfoPanel.appendText("Position: (" + turtleObservable.getXCoordinate() + "," + turtleObservable.getYCoordinate() + ")\n");
         turtleInfoPanel.appendText("Showing: " + turtleObservable.getTurtleShowing() + "\n");
-        turtleInfoPanel.appendText("Active: " + turtleObservable.getTurtleStatus() + "\n");
+        //turtleInfoPanel.appendText("Active: " + turtleObservable.getTurtleStatus() + "\n");
         turtleInfoPanel.appendText("Direction angle: " + turtleObservable.getDirectionAngle() + "\n");
     }
 
