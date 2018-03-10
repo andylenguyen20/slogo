@@ -11,6 +11,12 @@ import view.Observer;
 
 import java.util.Map;
 
+/**
+ * Class which provides a front end representation of variables within the system. Also provides the user a way to
+ * edit variables through an input field
+ * @author Andy Nguyen
+ * @author Edward Zhuang
+ */
 public class VariableHistoryBox extends ScreenComponent implements Observer {
 	private static final int TEXTAREA_ROWS = 10;
 	private static final int VALUEFIELD_WIDTH = 30;
@@ -23,22 +29,45 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 	private Button submitButton;
 	private TextField editValueField;
 	private ComboBox<String> variableComboBox;
+
+	/**
+	 * Constructor
+	 * @see ScreenComponent
+	 */
 	public VariableHistoryBox(){
 		super();
 	}
 
-	public void setClearValueDelegate(ClearValueDelegate theClearValueDelegate){
-		this.clearValueDelegate = theClearValueDelegate;
+
+	/**
+	 * Set's up this class' clearValueDelegate
+	 * @param clearValueDelegate interface which allows clearing of variables
+	 */
+	public void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
+		this.clearValueDelegate = clearValueDelegate;
 	}
 
+	/**
+	 * Set's up this class' clearValueDelegate
+	 * @param valueModifierDelegate interface which allows modifying of variables =
+	 */
 	public void setValueModifierDelegate(ValueModifierDelegate valueModifierDelegate){
 		this.valueModifierDelegate = valueModifierDelegate;
 	}
 
+	/**
+	 * Set's up this class' variableHistory
+	 * @param variableHistory connects to back end variable history
+	 */
 	public void setVariableHistory(VariableHistoryObservable variableHistory){
 		this.variableHistory = variableHistory;
 	}
 
+	/**
+	 * Maps actions of this class' buttons
+	 * clearButton clears variables
+	 * submitButton modifies a designated variable's value
+	 */
 	@Override
 	protected void mapUserActions() {
 		clearButton.setOnAction((event -> {
@@ -49,13 +78,23 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 		}));
 	}
 
+	/**
+	 * Creates BorderPane and adds front end items to it
+	 * @see ScreenComponent
+	 */
 	public void generateGUIComponent(){
 		BorderPane borderPane = super.getBorderPane();
 		this.addButtonAndLabels(borderPane);
 		this.addTextArea(borderPane);
 	}
 
-	protected void fillBox(Map<String, Double> variableMap){
+
+	/**
+	 * Fills textArea with variables and values from a map, and updates variableComboBox to allow for editing of
+	 * these variables
+	 * @param variableMap map of variables to their values
+	 */
+	private void fillBox(Map<String, Double> variableMap){
 		StringBuilder commandsToDisplay = new StringBuilder();
 		for(String variableName : variableMap.keySet()){
 			commandsToDisplay.append(variableName);
@@ -72,6 +111,10 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 		variableComboBox.getSelectionModel().selectFirst();
 	}
 
+	/**
+	 * Adds buttons and labels to a passed in BorderPane
+	 * @param borderPane BorderPane on which buttons and labels are added
+	 */
 	private void addButtonAndLabels(BorderPane borderPane){
 		HBox topComponent = new HBox();
 		clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("CLEAR"));
@@ -90,7 +133,10 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 		borderPane.setBottom(bottomComponent);
 	}
 
-
+	/**
+	 * Adds text area to a passed in BorderPane
+	 * @param borderPane BorderPane on which text area is added
+	 */
 	private void addTextArea(BorderPane borderPane){
 		textArea = new TextArea();
 		textArea.setEditable(false);
@@ -99,6 +145,9 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 		borderPane.setCenter(textArea);
 	}
 
+	/**
+	 * updates items in textArea with back end variable items
+	 */
 	@Override
 	public void notifyOfChanges() {
 		this.fillBox(variableHistory.getVariableMapCopy());

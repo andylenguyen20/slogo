@@ -6,6 +6,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import propertiesFiles.ResourceBundleManager;
 
+/**
+ * Class which provides buttons for user to click which manipulates pen options.
+ * @author Andy Nguyen
+ * @author Edward Zhuang
+ */
 public class PenControlPanel extends ScreenComponent{
     private static final int SMALL_PEN_SIZE = 5;
     private static final int MED_PEN_SIZE = 15;
@@ -17,14 +22,25 @@ public class PenControlPanel extends ScreenComponent{
     private Button medPenButton;
     private Button largePenButton;
 
+    /**
+     * Constructor
+     * @see ScreenComponent
+     */
     public PenControlPanel(){
         super();
     }
 
+    /**
+     * Sets up this class' parserActionDelegate
+     * @param parserActionDelegate interface which allows passing of commands to parser
+     */
     public void setController(ParserActionDelegate parserActionDelegate){
         this.parserActionDelegate = parserActionDelegate;
     }
 
+    /**
+     * Maps user actions of PenControlPanel buttons
+     */
     @Override
     protected void mapUserActions() {
         penUpButton.setOnAction((event -> {
@@ -45,6 +61,9 @@ public class PenControlPanel extends ScreenComponent{
 
     }
 
+    /**
+     * Adds the buttons to the BorderPane, formats them with VBox.
+     */
     @Override
     public void generateGUIComponent() {
         BorderPane borderPane = super.getBorderPane();

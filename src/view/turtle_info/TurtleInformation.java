@@ -17,7 +17,6 @@ public class TurtleInformation {
     public static final int COORDINATE_OFFSET = 225;
     private Stage helpStage;
     private Group helpRoot;
-    private TableView table;
     private TurtleObservable turtle;
     private int turtleX;
     private int turtleY;

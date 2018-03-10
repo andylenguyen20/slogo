@@ -11,7 +11,13 @@ import nodes.NodeInterface;
 
 import view.Observer;
 
-
+/**
+ * @author Belanie Nagiel and Charlie Dracos
+ * 
+ * The turtle class that creates new turtles and keeps track of all the information within a turtle. Also implements
+ * interfaces to allow the front end to track changes on a turtle.
+ *
+ */
 public class Turtle implements TurtleObservable, NodeInterface
 {
 	private double XCoordinate;
@@ -32,7 +38,15 @@ public class Turtle implements TurtleObservable, NodeInterface
 	private double ID;
 
 
-	//Could pass pen color in parameter! Right now we call setPenColor in controller. TODO: Discuss this idea, Also screen size in constructor?
+	/**
+	 * Class constructor
+	 * 
+	 * @param width
+	 * @param height
+	 * @param color
+	 * @param ID
+	 * @param startShape
+	 */
 	public Turtle(double width, double height, Color color, double ID, String startShape)
 	{
 		turtleShape = startShape;
@@ -51,14 +65,26 @@ public class Turtle implements TurtleObservable, NodeInterface
 		toroidal = new WraparoundHandler(width, height);
 	}
 
+	/**
+	 *
+	 * @return the current x coordinate
+	 */
 	public double getXCoordinate() {
 		return XCoordinate;
 	}
 	
+	/**
+	 * 
+	 * @return the current y coordinate
+	 */
 	public double getYCoordinate() {
 		return YCoordinate;
 	}
 
+	/**
+	 * Sets the coordinates and adds the appropriate lines to the turtle's path.
+	 * 
+	 */
 	public void setCoordinates(double futureX, double futureY) {
 		double currentX = XCoordinate;
 		double currentY = YCoordinate;
@@ -71,25 +97,44 @@ public class Turtle implements TurtleObservable, NodeInterface
 		}
 	}
 
+	/**
+	 * @returns the home position of the turtle
+	 */
 	public double[] getHome(){
 		return home;
 	}
 
+	/**
+	 * @return the current direction angle
+	 */
 	public double getDirectionAngle() {
 		return directionAngle;
 	}
 
 
+	/**
+	 * Sets the direction angle of the turtle
+	 * 
+	 * @param directionAngle
+	 */
 	public void setDirectionAngle(double directionAngle) {
 		this.directionAngle = directionAngle;
 	}
 
 
+	/**
+	 * @return the turtle's path lines
+	 */
 	public List<Line> getLines() {
 		return lines;
 	}
 
 
+	/**
+	 * Adds a new line to the turtle's path lines
+	 * 
+	 * @param line
+	 */
 	private void addLine(Line line) {
 		if(penShowing){
 			line.setStroke(penColor);
@@ -98,53 +143,101 @@ public class Turtle implements TurtleObservable, NodeInterface
 		}
 	}
 	
+	/**
+	 * Clears the turtle's current path lines
+	 * 
+	 */
 	public void clearLines()
 	{
 		lines = new ArrayList<Line>();
 	}
 
 
+	/**
+	 *
+	 * @return whether or not the pen is showing
+	 */
 	public boolean getPenShowing() {
 		return penShowing;
 	}
 
-
+	/**
+	 * Set whether the turtle's path is shown.
+	 * 
+	 * @param penShowing
+	 */
 	public void setPenShowing(boolean penShowing) {
 		this.penShowing = penShowing;
 	}
 
+	/**
+	 * 
+	 * @return whether or not the turtle is showing
+	 */
 	public boolean getTurtleShowing() {
 		return turtleShowing;
 	}
 
+	/**
+	 * Sets the color of the turtle's path
+	 * 
+	 * @param color
+	 */
 	public void setPenColor(Color color) 
 	{		
 		this.penColor = color;
 	}
 	
+	/**
+	 * 
+	 * @return the current color of the turtle's path
+	 */
 	public Color getPenColor()
 	{
 		return penColor;
 	}
 
+	/**
+	 * Sets whether or not the turtle is showing
+	 * 
+	 * @param turtleShowing
+	 */
 	public void setTurtleShowing(boolean turtleShowing) {
 		this.turtleShowing = turtleShowing;
 	}
 
+	/**
+	 * Sets the width of the turtle path
+	 * 
+	 * @param pixels
+	 */
 	public void setPenSize(double pixels) {
 		this.penSize = pixels;
 	}
 	
+	/**
+	 * 
+	 * @return the turtle's current shape
+	 */
 	public String getTurtleShape() {
 		return turtleShape;
 	}
 
+	/**
+	 * Sets the turtle's current shape
+	 * 
+	 * @param turtleShape
+	 */
 	public void setTurtleShape(String turtleShape)
 	{
 		this.turtleShape = turtleShape;
 	}
 
 	@Override
+	/**
+	 * 
+	 * @return the turtle's ID
+	 */
 	public double getValue() {
 		return ID;
 	}
@@ -159,6 +252,9 @@ public class Turtle implements TurtleObservable, NodeInterface
 	}
 	
 	@Override
+	/**
+	 * @return whether or not the turtle is active
+	 */
 	public boolean getTurtleStatus() {
 		return activeStatus;
 	}

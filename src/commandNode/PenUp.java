@@ -7,6 +7,13 @@ import model.Turtle;
 import nodes.GeneralCommand;
 import nodes.NodeInterface;
 
+/**
+ * @author Belanie Nagiel and Charlie Dracos
+ * 
+ * PenUp class that creates a new extension of Node and sets the functionality for the evaluate method implemented from
+ * the CommandInterface interface.
+ *
+ */
 public class PenUp extends GeneralCommand {
 
 	public PenUp(Model model, int numChildren) {

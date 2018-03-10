@@ -15,6 +15,11 @@ import view.Observer;
 
 import java.util.List;
 
+/**
+ * Palette class with visual representation of back end palette options
+ * @author Andy Nguyen
+ * @author Edward Zhuang
+ */
 public class Palette extends ScreenComponent implements Observer{
 
     public static final int RECT_WIDTH = 60;
@@ -25,25 +30,39 @@ public class Palette extends ScreenComponent implements Observer{
 
     private PaletteObservable paletteObservable;
 
+    /**
+     * @see ScreenComponent
+     */
     public Palette(){
         super();
     }
 
     @Override
     protected void mapUserActions() {
-
     }
 
+    /**
+     * Sets up this class' paletteObservable
+     * @param paletteObservable interface with methods to retrieve back end palette values
+     */
     public void setPaletteObservable(PaletteObservable paletteObservable){
         this.paletteObservable = paletteObservable;
     }
 
+    /**
+     * Creates BorderPane and adds front end items to it
+     * @see ScreenComponent
+     */
     @Override
     public void generateGUIComponent() {
         BorderPane borderPane = super.getBorderPane();
         generateVBox(borderPane);
     }
 
+    /**
+     * GeneratesVBox
+     * @param borderPane BorderPane where VBox is added
+     */
     private void generateVBox(BorderPane borderPane){
         vBox = new VBox();
         vBox.setPadding(new Insets(VBOX_SPACING, VBOX_SPACING, VBOX_SPACING, VBOX_SPACING));
@@ -54,6 +73,11 @@ public class Palette extends ScreenComponent implements Observer{
         borderPane.setCenter(vBox);
     }
 
+    /**
+     * Updates the visual representation of color and image palette options
+     * @param colorList list of colors to be shown
+     * @param shapeList list of images to be shown
+     */
     public void updatePalette(List<Color> colorList, List<String> shapeList){
 
         vBox.getChildren().clear();
@@ -75,7 +99,9 @@ public class Palette extends ScreenComponent implements Observer{
         }
     }
 
-
+    /**
+     * Updates the palette
+     */
     @Override
     public void notifyOfChanges() {
         updatePalette(paletteObservable.getColorList(), paletteObservable.getShapeOptions());
