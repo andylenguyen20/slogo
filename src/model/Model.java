@@ -184,25 +184,14 @@ public class Model implements PaletteObservable, DrawerObservable {
 		activeTurtles = newActives;
 	}
 	
-	/**
-	 * Sets the turtle of ID to not active
-	 * @param turtleID
-	 */
-	/** public void setTurtleInactive(double turtleID)
-	{
-		activeTurtles.remove(allTurtles.get(turtleID));
-		allTurtles.get(turtleID).setTurtleStatus(false);
-	} **/
-	
-	/**
-	 * Sets the turtle of ID to active
-	 * @param turtleID
-	 */
-	/** public void setTurtleActive(double turtleID)
-	{
-		activeTurtles.add(allTurtles.get(turtleID));
-		allTurtles.get(turtleID).setTurtleStatus(true);
-	} **/
+	public void changeTurtleActivity (double ID) {
+		if (!activeTurtles.contains(ID)) {
+			activeTurtles.add(allTurtles.get(ID));
+		}
+		else {
+			activeTurtles.remove(allTurtles.get(ID));
+		}
+	}
 
 	public void update (Consumer<Turtle> T) {
 		for (Turtle t: getActiveTurtles()) {
