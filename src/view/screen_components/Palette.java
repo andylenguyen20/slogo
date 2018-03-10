@@ -67,9 +67,9 @@ public class Palette extends ScreenComponent implements Observer{
         vBox = new VBox();
         vBox.setPadding(new Insets(VBOX_SPACING, VBOX_SPACING, VBOX_SPACING, VBOX_SPACING));
         vBox.setSpacing(VBOX_SPACING);
-        Label title2 = new Label(PALETTE_TITLE);
-        borderPane.setTop(title2);
-        BorderPane.setAlignment(title2, Pos.CENTER);
+        Label paletteTitle = new Label(PALETTE_TITLE);
+        borderPane.setTop(paletteTitle);
+        BorderPane.setAlignment(paletteTitle, Pos.CENTER);
         borderPane.setCenter(vBox);
     }
 

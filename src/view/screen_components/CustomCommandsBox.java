@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.CustomCommandObservable;
+import parsers.Parser;
 import propertiesFiles.ResourceBundleManager;
 import view.Observer;
 
@@ -32,25 +33,12 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     /**
      * @see ScreenComponent
      */
-    public CustomCommandsBox(){
+    public CustomCommandsBox(ParserActionDelegate p, ClearValueDelegate c){
         super();
+        this.parserActionDelegate = p;
+        this.clearValueDelegate = c;
     }
 
-    /**
-     * Sets up class' ParserActionDelegate
-     * @param parserActionDelegate interface which allows passing of commands to parser
-     */
-    public void setParserActionDelegate(ParserActionDelegate parserActionDelegate){
-        this.parserActionDelegate = parserActionDelegate;
-    }
-
-    /**
-     * Set's up this class' clearValueDelegate
-     * @param clearValueDelegate interface which allows clearing of values
-     */
-    public void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
-        this.clearValueDelegate = clearValueDelegate;
-    }
 
     /**
      * Adds buttons and labels to a passed in BorderPane
@@ -69,8 +57,6 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
         scrollPane.setPrefHeight(SCROLLPANE_HEIGHT);
         scrollPane.setContent(commandList);
         borderPane.setCenter(scrollPane);
-
-
     }
 
     /**

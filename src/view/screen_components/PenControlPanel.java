@@ -26,15 +26,8 @@ public class PenControlPanel extends ScreenComponent{
      * Constructor
      * @see ScreenComponent
      */
-    public PenControlPanel(){
+    public PenControlPanel(ParserActionDelegate parserActionDelegate){
         super();
-    }
-
-    /**
-     * Sets up this class' parserActionDelegate
-     * @param parserActionDelegate interface which allows passing of commands to parser
-     */
-    public void setController(ParserActionDelegate parserActionDelegate){
         this.parserActionDelegate = parserActionDelegate;
     }
 

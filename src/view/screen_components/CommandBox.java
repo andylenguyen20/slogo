@@ -32,16 +32,9 @@ public class CommandBox extends ScreenComponent{
 	/**
 	 * @see ScreenComponent
 	 */
-	public CommandBox() {
+	public CommandBox(ParserActionDelegate p) {
 		super();
-	}
-
-	/**
-	 * sets up parserActionDelegate
-	 * @param parserActionDelegate
-	 */
-	public void setController(ParserActionDelegate parserActionDelegate){
-		this.parserActionDelegate = parserActionDelegate;
+		this.parserActionDelegate = p;
 	}
 
 	/**
@@ -56,12 +49,7 @@ public class CommandBox extends ScreenComponent{
 			parserActionDelegate.performParserAction(parser -> parser.passTextCommand(commandTextArea.getText().trim()));
 			commandTextArea.clear();
 		}));
-		languageBox.valueProperty().addListener(new ChangeListener<Object>() {
-			@Override
-			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-				changeLanguage();
-			}
-		});
+		languageBox.valueProperty().addListener(((observable, oldValue, newValue) -> changeLanguage()));
 	}
 
 	/**

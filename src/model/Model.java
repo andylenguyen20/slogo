@@ -16,6 +16,8 @@ import view.constants.PaletteConstants;
  *
  */
 public class Model implements PaletteObservable, DrawerObservable {
+	private static final double INACTIVE_OPACITY = 0.3;
+	private static final double ACTIVE_OPACITY = 1;
 	private Color backgroundColor;
 	private List<Color> colorOptions;
 	private List<String> shapeOptions;
@@ -183,15 +185,6 @@ public class Model implements PaletteObservable, DrawerObservable {
 	public void setActiveTurtles(List<Turtle> newActives) {
 		activeTurtles = newActives;
 	}
-	
-	public void changeTurtleActivity (double ID) {
-		if (!activeTurtles.contains(ID)) {
-			activeTurtles.add(allTurtles.get(ID));
-		}
-		else {
-			activeTurtles.remove(allTurtles.get(ID));
-		}
-	}
 
 	public void update (Consumer<Turtle> T) {
 		for (Turtle t: getActiveTurtles()) {
@@ -225,6 +218,19 @@ public class Model implements PaletteObservable, DrawerObservable {
 	 */
 	public void initializePalette(){
 		colorIndexObserver.notifyOfChanges();
+	}
+
+	public void changeTurtleActivity (double ID) {
+		Turtle t = allTurtles.get(ID);
+		if (!activeTurtles.contains(t)) {
+			activeTurtles.add(t);
+			t.setOpacity(ACTIVE_OPACITY);
+		}
+		else {
+			activeTurtles.remove(t);
+			t.setOpacity(INACTIVE_OPACITY);
+		}
+		drawerObserver.notifyOfChanges();
 	}
 
 	@Override

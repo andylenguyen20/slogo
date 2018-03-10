@@ -1,6 +1,6 @@
 package view.screen_components;
 
-import controller.DeactivationDelegate;
+import controller.ActivationDelegate;
 import controller.ParserActionDelegate;
 import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
@@ -26,7 +26,7 @@ import java.util.List;
  *  @author Andy Nguyen
  *  @author Edward Zhuang
  */
-public class TheDrawer extends ScreenComponent implements Observer{
+public class Drawer extends ScreenComponent implements Observer{
     public static final double CANVAS_WIDTH = 450;
     public static final double CANVAS_HEIGHT = 450;
     private static final int VERTICAL_INSET = 10;
@@ -37,12 +37,12 @@ public class TheDrawer extends ScreenComponent implements Observer{
     private ComboBox<Integer> turtleImageBox;
 
     private DrawerObservable drawerObservable;
-    private List<TheDrawerTurtleComponent> turtlesOnScreen;
+    private List<DrawerTurtleComponent> turtlesOnScreen;
     private List<TurtleObservable> linkedTurtles;
-    private TheDrawerBackgroundComponent backgroundComponent;
+    private DrawerBackgroundComponent backgroundComponent;
 
     private ParserActionDelegate parserActionDelegate;
-    private DeactivationDelegate deactivationDelegate;
+    private ActivationDelegate activationDelegate;
 
     private StackPane drawingScreen;
     private Canvas linesLayer;
@@ -53,11 +53,12 @@ public class TheDrawer extends ScreenComponent implements Observer{
      * @see ScreenComponent
      * Adds two arraylists which hold information about turtles
      */
-    public TheDrawer(){
+    public Drawer(ActivationDelegate activationDelegate, ParserActionDelegate parserActionDelegate){
         super();
-        this.deactivationDelegate = deactivationDelegate;
         linkedTurtles = new ArrayList<>();
         turtlesOnScreen = new ArrayList<>();
+        this.activationDelegate = activationDelegate;
+        this.parserActionDelegate = parserActionDelegate;
     }
 
     /**
@@ -67,14 +68,6 @@ public class TheDrawer extends ScreenComponent implements Observer{
     public void setDrawerObservable(DrawerObservable drawerObservable){
         this.drawerObservable = drawerObservable;
         this.update();
-    }
-
-    /**
-     * Sets up Drawer's ParserActionDelegate
-     * @param parserActionDelegate interface which allows Drawer to pass commands to parser
-     */
-    public void setTheParserActionDelegate(ParserActionDelegate parserActionDelegate){
-        this.parserActionDelegate = parserActionDelegate;
     }
 
     /**
@@ -106,7 +99,7 @@ public class TheDrawer extends ScreenComponent implements Observer{
         drawingScreen = new StackPane();
         linesLayer = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         backgroundLayer = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
-        backgroundComponent = new TheDrawerBackgroundComponent(backgroundLayer);
+        backgroundComponent = new DrawerBackgroundComponent(backgroundLayer);
         backgroundComponent.changeBackgroundColor(Color.WHITE);
         drawingScreen.getChildren().add(backgroundLayer);
         drawingScreen.getChildren().add(linesLayer);
@@ -153,8 +146,7 @@ public class TheDrawer extends ScreenComponent implements Observer{
      */
     private void addFrontEndTurtle(TurtleObservable turtleObservable){
         linkedTurtles.add(turtleObservable);
-        TheDrawerTurtleComponent additionalTurtle = new TheDrawerTurtleComponent(turtleObservable, drawingScreen, linesLayer);
-        additionalTurtle.setDeactivationDelegate(deactivationDelegate);
+        DrawerTurtleComponent additionalTurtle = new DrawerTurtleComponent(activationDelegate, turtleObservable, drawingScreen, linesLayer);
         turtlesOnScreen.add(additionalTurtle);
     }
 
@@ -169,7 +161,7 @@ public class TheDrawer extends ScreenComponent implements Observer{
             }
         }
         linesLayer.getGraphicsContext2D().clearRect(0,0,CANVAS_WIDTH, CANVAS_HEIGHT);
-        for(TheDrawerTurtleComponent frontEndTurtle : turtlesOnScreen){
+        for(DrawerTurtleComponent frontEndTurtle : turtlesOnScreen){
             frontEndTurtle.update();
         }
         backgroundComponent.changeBackgroundColor(drawerObservable.getBackgroundColor());

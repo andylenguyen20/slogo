@@ -29,8 +29,9 @@ public class TurtleControlPanel extends ScreenComponent {
      * Constructor
      * @see ScreenComponent
      */
-    public TurtleControlPanel(){
+    public TurtleControlPanel(ParserActionDelegate p){
         super();
+        this.parserActionDelegate = p;
     }
 
     /**
@@ -77,13 +78,5 @@ public class TurtleControlPanel extends ScreenComponent {
         vbox.getChildren().add(topPanel);
         vbox.getChildren().add(bottomPanel);
         borderPane.setCenter(vbox);
-    }
-
-    /**
-     * Sets up connection to Parser
-     * @param parserActionDelegate interface which allows TurtleControlPanel to pass commands to parser
-     */
-    public void setController(ParserActionDelegate parserActionDelegate){
-        this.parserActionDelegate = parserActionDelegate;
     }
 }

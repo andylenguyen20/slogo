@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 /**
  * Creates a popup with an image.
  * Used by HelpPopup
- * @author Andy Nguyen
  * @author Edward Zhuang
  */
 public class HelpSubPopup {

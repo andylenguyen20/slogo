@@ -13,7 +13,7 @@ import java.util.List;
  * @author Andy Nguyen
  * @author Edward Zhuang
  */
-public class TheDrawerLineComponent {
+public class DrawerLineComponent {
     private GraphicsContext gc;
 
     /**
@@ -21,7 +21,7 @@ public class TheDrawerLineComponent {
      * Creates a DrawerLineComponent which can draw lines onto a Canvas
      * @param gc GraphicsContext of Drawer's line Canvas
      */
-    public TheDrawerLineComponent(GraphicsContext gc){
+    public DrawerLineComponent(GraphicsContext gc){
         this.gc = gc;
     }
 

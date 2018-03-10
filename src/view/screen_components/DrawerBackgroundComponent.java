@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
  * @author Andy Nguyen
  * @author Edward Zhuang
  */
-public class TheDrawerBackgroundComponent {
+public class DrawerBackgroundComponent {
 
     private static final Color BORDER_COLOR = Color.BLACK;
     private Canvas canvas;
@@ -21,7 +21,7 @@ public class TheDrawerBackgroundComponent {
      * Initializes Canvas and GraphicsContext
      * @param canvas canvas which will hold background color
      */
-    public TheDrawerBackgroundComponent(Canvas canvas){
+    public DrawerBackgroundComponent(Canvas canvas){
         this.canvas = canvas;
         this.gc = canvas.getGraphicsContext2D();
     }

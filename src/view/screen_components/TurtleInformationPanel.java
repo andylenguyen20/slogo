@@ -7,7 +7,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.TurtleObservable;
 
-
+/**
+ * @author Andy Nguyen
+ *
+ */
 public class TurtleInformationPanel extends ScreenComponent{
     private static final String TITLE = "Turtle Info";
     private static final double WIDTH = 200;
