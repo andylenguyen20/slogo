@@ -12,6 +12,12 @@ import javafx.scene.layout.VBox;
 import propertiesFiles.ResourceBundleManager;
 import view.factories.ComboBoxFactory;
 
+/**
+ * CommandBox class
+ * Responsible for the text area in which user inputs commands
+ * @author Andy Nguyen
+ * @author Edward Zhuang
+ */
 public class CommandBox extends ScreenComponent{
 	private static final String[] LANGUAGE_LIST = {"English", "Chinese"};
 	private Button commandClearButton;
@@ -23,14 +29,24 @@ public class CommandBox extends ScreenComponent{
 	private final int COMMAND_ROWS = 4;
 	private final int COMMAND_COLUMNS = 30;
 
+	/**
+	 * @see ScreenComponent
+	 */
 	public CommandBox() {
 		super();
 	}
 
+	/**
+	 * sets up parserActionDelegate
+	 * @param parserActionDelegate
+	 */
 	public void setController(ParserActionDelegate parserActionDelegate){
 		this.parserActionDelegate = parserActionDelegate;
 	}
 
+	/**
+	 * Maps actions of language box, clear button, and run button
+	 */
 	@Override
 	protected void mapUserActions() {
 		commandClearButton.setOnAction((event -> {
@@ -48,6 +64,10 @@ public class CommandBox extends ScreenComponent{
 		});
 	}
 
+	/**
+	 * Creates BorderPane and adds front end items to it
+	 * @see ScreenComponent
+	 */
 	public void generateGUIComponent(){
 		BorderPane borderPane = super.getBorderPane();
 		this.addInputMenu(borderPane);
@@ -55,14 +75,22 @@ public class CommandBox extends ScreenComponent{
 		commandLabel = new Label(ResourceBundleManager.retrieveLabel("COMMAND_LABEL_TEXT"));
 		borderPane.setTop(commandLabel);
 	}
-	
+
+	/**
+	 * Adds commandTextArea
+	 * @param borderPane BorderPane where text area is appended
+	 */
 	private void addConsoleWindow(BorderPane borderPane){
 		commandTextArea = new TextArea();
 		commandTextArea.setPrefRowCount(COMMAND_ROWS);
 		commandTextArea.setPrefColumnCount(COMMAND_COLUMNS);
 		borderPane.setCenter(commandTextArea);
 	}
-	
+
+	/**
+	 * Adds Buttons and ComboBox
+	 * @param borderPane BorderPane where text area is appended
+	 */
 	private void addInputMenu(BorderPane borderPane){
 		VBox rightComponent = new VBox();
 		commandRunButton = new Button(ResourceBundleManager.retrieveButtonLabel("RUN"));
@@ -74,6 +102,9 @@ public class CommandBox extends ScreenComponent{
 		borderPane.setRight(rightComponent);
 	}
 
+	/**
+	 * Changes language used to read commands inputted by user
+	 */
 	private void changeLanguage(){
 		parserActionDelegate.performParserAction(parser -> parser.setLanguage(languageBox.getValue()));
 	}

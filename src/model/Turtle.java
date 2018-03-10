@@ -65,6 +65,11 @@ public class Turtle implements TurtleObservable, NodeInterface
 		toroidal = new WraparoundHandler(width, height);
 	}
 
+	public void addObserver(Observer turtleObserver){
+		//System.out.println("hi");
+		this.turtleObserver = turtleObserver;
+	}
+
 	/**
 	 *
 	 * @return the current x coordinate
@@ -242,11 +247,11 @@ public class Turtle implements TurtleObservable, NodeInterface
 		return ID;
 	}
 
-	/**
-	 * Sets whether the turtle is active or not
-	 * 
-	 * @param active
-	 */
+	@Override
+	public double getID(){
+		return ID;
+	}
+
 	public void setTurtleStatus(boolean active) {
 		this.activeStatus = active;
 	}

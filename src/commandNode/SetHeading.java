@@ -27,8 +27,7 @@ public class SetHeading extends GeneralCommand {
 	 * @return number of degrees moved
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		double x = arguments.get(0).getValue();
-		model.update(t -> setHeading(t, x));
+		model.update(t -> setHeading(t, arguments.get(0).getValue()));
 		return value;
 	}
 

@@ -7,7 +7,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import propertiesFiles.ResourceBundleManager;
 
-
+/**
+ * Class which provides buttons for user to click which manipulates on screen turtles.
+ * @author Andy Nguyen
+ * @author Edward Zhuang
+ */
 public class TurtleControlPanel extends ScreenComponent {
     private static final int STEP_SIZE = 50;
     private static final int TURN_SIZE = 20;
@@ -21,10 +25,17 @@ public class TurtleControlPanel extends ScreenComponent {
     private Button leftTurnButton;
     private Button rightTurnButton;
 
+    /**
+     * Constructor
+     * @see ScreenComponent
+     */
     public TurtleControlPanel(){
         super();
     }
 
+    /**
+     * Maps user actions of TurtleControlPanel buttons
+     */
     @Override
     protected void mapUserActions() {
         forwardButton.setOnAction((event -> {
@@ -42,6 +53,9 @@ public class TurtleControlPanel extends ScreenComponent {
 
     }
 
+    /**
+     * Adds the buttons to the BorderPane, formats them with HBox and VBox.
+     */
     @Override
     public void generateGUIComponent() {
         BorderPane borderPane = super.getBorderPane();
@@ -65,6 +79,10 @@ public class TurtleControlPanel extends ScreenComponent {
         borderPane.setCenter(vbox);
     }
 
+    /**
+     * Sets up connection to Parser
+     * @param parserActionDelegate interface which allows TurtleControlPanel to pass commands to parser
+     */
     public void setController(ParserActionDelegate parserActionDelegate){
         this.parserActionDelegate = parserActionDelegate;
     }

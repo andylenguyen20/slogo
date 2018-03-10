@@ -14,6 +14,11 @@ import view.Observer;
 
 import java.util.List;
 
+/**
+ * Class which sets up front end representation of custom commands
+ * @author Andy Nguyen
+ * @author Edward Zhuang
+ */
 public class CustomCommandsBox extends ScreenComponent implements Observer {
     public static final int SCROLLPANE_WIDTH = 200;
     public static final int SCROLLPANE_HEIGHT = 100;
@@ -24,14 +29,33 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
     private ParserActionDelegate parserActionDelegate;
     private ClearValueDelegate clearValueDelegate;
 
+    /**
+     * @see ScreenComponent
+     */
+    public CustomCommandsBox(){
+        super();
+    }
+
+    /**
+     * Sets up class' ParserActionDelegate
+     * @param parserActionDelegate interface which allows passing of commands to parser
+     */
     public void setParserActionDelegate(ParserActionDelegate parserActionDelegate){
         this.parserActionDelegate = parserActionDelegate;
     }
 
+    /**
+     * Set's up this class' clearValueDelegate
+     * @param clearValueDelegate interface which allows clearing of values
+     */
     public void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
         this.clearValueDelegate = clearValueDelegate;
     }
 
+    /**
+     * Adds buttons and labels to a passed in BorderPane
+     * @param borderPane BorderPane on which buttons and labels are added
+     */
     private void addButtonAndLabels(BorderPane borderPane) {
         HBox topComponent = new HBox();
         clearButton = new Button(ResourceBundleManager.retrieveButtonLabel("CLEAR"));
@@ -49,10 +73,17 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
 
     }
 
+    /**
+     * Sets up customCommandObservable
+     * @param holder interface with methods to manipulate custom commands
+     */
     public void setCustomCommandObservable(CustomCommandObservable holder){
         this.customCommandObservable = holder;
     }
 
+    /**
+     * updates custom command history
+     */
     @Override
     public void notifyOfChanges() {
         List<String> commands = customCommandObservable.getCommands();
@@ -67,11 +98,19 @@ public class CustomCommandsBox extends ScreenComponent implements Observer {
         }
     }
 
+    /**
+     * Maps actions of this class' buttons
+     * clearButton clears history
+     */
     @Override
     protected void mapUserActions() {
         clearButton.setOnAction((event -> clearValueDelegate.clear()));
     }
 
+    /**
+     * Creates BorderPane and adds front end items to it
+     * @see ScreenComponent
+     */
     @Override
     public void generateGUIComponent() {
         BorderPane borderPane = super.getBorderPane();

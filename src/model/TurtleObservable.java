@@ -14,4 +14,5 @@ public interface TurtleObservable {
     boolean getTurtleShowing();
     String getTurtleShape();
     boolean getTurtleStatus();
+    double getID();
 }

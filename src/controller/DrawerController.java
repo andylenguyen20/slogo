@@ -1,13 +1,14 @@
 package controller;
 
 import model.Model;
+import model.Turtle;
 import parsers.Parser;
 import view.GUI;
 import view.screen_components.TheDrawer;
 
 import java.util.function.Consumer;
 
-public class DrawerController extends Controller implements ParserActionDelegate {
+public class DrawerController extends Controller implements ParserActionDelegate, DeactivationDelegate {
     private TheDrawer drawer;
     private Model model;
     private Parser parser;
@@ -19,7 +20,7 @@ public class DrawerController extends Controller implements ParserActionDelegate
 
     @Override
     protected void initializeScreenComponents() {
-        drawer = new TheDrawer();
+        drawer = new TheDrawer(this);
     }
 
     @Override
@@ -40,5 +41,11 @@ public class DrawerController extends Controller implements ParserActionDelegate
     @Override
     public void performParserAction(Consumer<Parser> p) {
         p.accept(parser);
+    }
+
+    @Override
+    public void deactivate(double ID){
+        model.setTurtleInactive(ID);
+        System.out.println("all done");
     }
 }

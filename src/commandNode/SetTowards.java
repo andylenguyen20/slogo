@@ -22,13 +22,7 @@ public class SetTowards extends GeneralCommand
 	 * @return the number of degrees turtle turned
 	 */
 	public double evaluate(List<NodeInterface> arguments) {
-		double x = arguments.get(0).getValue();
-		double y = arguments.get(1).getValue();
-		double rad = Math.atan(y/x);
-		double deg = rad * degreeConversion; 
-		if( x < 0) { deg = 180 + deg; }
-		double finalDeg = deg;
-		model.update(t -> setTowards(t, finalDeg));
+		model.update(t -> setTowards(t, degreeCalc(arguments.get(0).getValue(), arguments.get(1).getValue())));
 		return value;
 	}
 
@@ -36,6 +30,14 @@ public class SetTowards extends GeneralCommand
 		double change = Math.abs(t.getDirectionAngle() - deg);
 		t.setDirectionAngle(deg);
 		value = change;
+	}
+
+	private double degreeCalc (double x, double y) {
+		double rad = Math.atan(y/x);
+		double deg = rad*degreeConversion;
+		if( x < 0) { deg = 180 + deg; }
+		double finalDeg = deg;
+		return finalDeg;
 	}
 
 
