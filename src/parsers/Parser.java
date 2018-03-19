@@ -1,5 +1,6 @@
 package parsers;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -28,15 +29,13 @@ import propertiesFiles.ResourceBundleManager;
  */
 public class Parser
 {
-	protected Map<String,Pattern> myTranslation;
-	private boolean newCommand = true;
 	private Map<String,Pattern> regex;
-	protected Map<String,Integer> children;
-	private static final String REGEX_FILE = "parsers/regex";
+	private final String REGEX_FILE = "parsers/regex";
+	private final String CREATION_PACKAGE = "parsers.";
 	private Model model;
 	private VariablesHistory varHistory;
 	private CommandHistory comHistory;
-	private String lang;
+	private String lang = "English";
 
 	/**
 	 * Class Constructor
@@ -49,30 +48,11 @@ public class Parser
 	 */
 	public Parser(Model m, VariablesHistory VH, CommandHistory CH)
 	{
-		myTranslation = new HashMap<>();
-
 		regex = new HashMap<>();
 		addResources(REGEX_FILE, regex);
-
-		createChildrenMap();
-
 		model = m;
 		varHistory = VH;
 		comHistory = CH;
-		lang = "English";
-	}
-
-	private void createChildrenMap()
-	{
-		children = new HashMap<>();
-		ResourceBundle numChildren = ResourceBundle.getBundle("parsers/numChildren");
-		Enumeration<String> keys = numChildren.getKeys();
-		while(keys.hasMoreElements())
-		{
-			String key = keys.nextElement();
-			children.put(key, Integer.parseInt(numChildren.getString(key)));
-		}
-
 	}
 
 	/**
@@ -83,7 +63,7 @@ public class Parser
 	 * @param filepath
 	 * @param map
 	 */
-	public void addResources(String filepath, Map<String,Pattern> map)
+	private void addResources(String filepath, Map<String,Pattern> map)
 	{
 		ResourceBundle language = ResourceBundle.getBundle(filepath);
 		Enumeration<String> keys = language.getKeys();
@@ -107,15 +87,8 @@ public class Parser
 		lang = language;
 	}
 
-	public List<NodeInterface> parseString(String command)
+	protected List<NodeInterface> parseString(String command)
 	{
-		String languageFilePath = "resources.languages/" + lang;
-		addResources(languageFilePath, myTranslation);
-		if(newCommand)
-		{
-			comHistory.addCommand(command);
-		}
-		newCommand = true;
 		int commentIndex = command.indexOf("#");
 		if (commentIndex >= 0)
 		{
@@ -131,12 +104,14 @@ public class Parser
 	{
 		String oldLanguage = lang;
 		setLanguage(ResourceBundleManager.retrieveOnScreenCommand("DEFAULT_LANGUAGE"));
+		comHistory.addCommand(command);
 		List<NodeInterface> fromButton = parseString(command);
 		makeTree(fromButton);
 		setLanguage(oldLanguage);
 	}
 
 	public void passTextCommand(String command){
+		comHistory.addCommand(command);
 		List<NodeInterface> nodeList = this.parseString(command);
 		this.makeTree(nodeList);
 	}
@@ -168,47 +143,7 @@ public class Parser
 				if(regex.get(key).matcher(text).matches())
 				{
 					match = true;
-					//nf.makeToken(key, text, varHistory, model, children.get(commandType));
-					if(key.equals("Command") && !nodeList.isEmpty() && nodeList.get(i-1) instanceof MakeUserInstruction)
-					{
-						CustomCommand n = new CustomCommand(text,varHistory);
-						nodeList.add(n);
-					}
-					else if(key.equals("List"))
-					{
-						ListNode l = new ListNode();
-						String noBrackets = text.substring(1,text.length()-1);
-						String trimmed = noBrackets.trim();
-						newCommand = false;
-						List<NodeInterface> listNodes = parseString(trimmed);
-						for(NodeInterface ln: listNodes)
-						{
-							l.add(ln);
-						}
-						nodeList.add(l);
-					}
-					else if(key.equals("InfiniteCommand"))
-					{
-						String noParentheses = text.substring(1,text.length()-1);
-						String trimmed = noParentheses.trim();
-						newCommand = false;
-						List<NodeInterface> listNodes = parseString(trimmed);
-						NodeInterface com = listNodes.get(0);
-						String firstCommand =  com.getClass().toString().substring(com.getClass().toString().indexOf(".") + 1).trim();
-						int numChildren = children.get(firstCommand);
-						//System.out.println(numChildren);
-						UnlimitedCommand l = new UnlimitedCommand(com, numChildren);
-						for(int j = 1; j < listNodes.size(); j++)
-						{
-							l.add(listNodes.get(j));
-						}
-						nodeList.add(l);
-					}
-					else
-					{
-						NodeInterface node = NodeFactory.createNode(key, text, varHistory, model, myTranslation, comHistory, children);
-						nodeList.add(node);
-					}
+					buildNodeList(key,text,nodeList);
 				}
 			}
 			if(!match)
@@ -218,6 +153,21 @@ public class Parser
 			}
 		}
 
+	}
+
+	private void buildNodeList(String key, String text, List<NodeInterface> nodeList) 
+	{
+			try 
+			{
+				Constructor<?> c = Class.forName(CREATION_PACKAGE + key + "Creation").getConstructor(new Class[] {CommandHistory.class,VariablesHistory.class});
+				c.setAccessible(true);
+				((NodeCreation) c.newInstance(comHistory, varHistory)).makeNode(text, model, lang, nodeList);
+			} 
+			catch (Exception e) 
+			{
+				comHistory.addCommand("Error: Could not evaluate command");
+				throw new InvalidEntryException("Error: Could not evaluate command");
+			}
 	}
 
 }
