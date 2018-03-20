@@ -6,18 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandHistory implements CommandHistoryObservable{
-    //Andy's change
     private Observer commandHistoryObserver;
 
 	private List<String> commands;
 	private int index;
-	
+
 	public CommandHistory() {
 		commands = new ArrayList<>();
 		index = 0;
 	}
 
-	//Andy's change
     public void addObserver(Observer commandHistoryObserver){
 	    this.commandHistoryObserver = commandHistoryObserver;
     }

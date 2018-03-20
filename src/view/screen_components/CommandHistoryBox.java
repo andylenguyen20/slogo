@@ -21,6 +21,8 @@ import java.util.List;
  * @author Edward Zhuang
  */
 public class CommandHistoryBox extends ScreenComponent implements Observer {
+	private static final int WIDTH = 200;
+	private static final int HEIGHT = 300;
 	private CommandHistoryObservable commandHistory;
 	private Button clearButton;
 	private VBox commandList;
@@ -30,25 +32,10 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 	/**
 	 * @see ScreenComponent
 	 */
-	public CommandHistoryBox(){
+	public CommandHistoryBox(ParserActionDelegate p, ClearValueDelegate c){
 		super();
-	}
-
-
-	/**
-	 * Sets up class' ParserActionDelegate
-	 * @param parserActionDelegate interface which allows passing of commands to parser
-	 */
-	public void setParserActionDelegate(ParserActionDelegate parserActionDelegate){
-		this.parserActionDelegate = parserActionDelegate;
-	}
-
-	/**
-	 * Set's up this class' clearValueDelegate
-	 * @param clearValueDelegate interface which allows clearing of values
-	 */
-	public void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
-		this.clearValueDelegate = clearValueDelegate;
+		this.parserActionDelegate = p;
+		this.clearValueDelegate = c;
 	}
 
 	/**
@@ -92,8 +79,8 @@ public class CommandHistoryBox extends ScreenComponent implements Observer {
 		borderPane.setTop(topComponent);
 		commandList = new VBox();
 		ScrollPane scrollPane = new ScrollPane();
-		scrollPane.setMaxWidth(200);
-		scrollPane.setPrefHeight(300);
+		scrollPane.setMaxWidth(WIDTH);
+		scrollPane.setPrefHeight(HEIGHT);
 		scrollPane.setContent(commandList);
 		borderPane.setCenter(scrollPane);
 	}

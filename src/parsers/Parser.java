@@ -196,7 +196,7 @@ public class Parser
 						NodeInterface com = listNodes.get(0);
 						String firstCommand =  com.getClass().toString().substring(com.getClass().toString().indexOf(".") + 1).trim();
 						int numChildren = children.get(firstCommand);
-						System.out.println(numChildren);
+						//System.out.println(numChildren);
 						UnlimitedCommand l = new UnlimitedCommand(com, numChildren);
 						for(int j = 1; j < listNodes.size(); j++)
 						{

@@ -20,6 +20,7 @@ import view.Observer;
  */
 public class Turtle implements TurtleObservable, NodeInterface
 {
+	private double opacity = 1.0;
 	private double XCoordinate;
 	private double YCoordinate;
 	private double[] home = new double[2];
@@ -29,7 +30,7 @@ public class Turtle implements TurtleObservable, NodeInterface
 	private boolean turtleShowing;
 	private Color penColor;
 	private double penSize;
-	private boolean activeStatus;
+	//private boolean activeStatus;
 
 	
 	private WraparoundHandler toroidal;
@@ -64,7 +65,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 		turtleShape = startShape;
 		toroidal = new WraparoundHandler(width, height);
 	}
-
 	/**
 	 *
 	 * @return the current x coordinate
@@ -233,6 +233,14 @@ public class Turtle implements TurtleObservable, NodeInterface
 		this.turtleShape = turtleShape;
 	}
 
+	public void setOpacity(double opacity){
+		this.opacity = opacity;
+	}
+
+	public double getOpacity(){
+		return opacity;
+	}
+
 	@Override
 	/**
 	 * 
@@ -242,20 +250,16 @@ public class Turtle implements TurtleObservable, NodeInterface
 		return ID;
 	}
 
-	/**
-	 * Sets whether the turtle is active or not
-	 * 
-	 * @param active
-	 */
-	public void setTurtleStatus(boolean active) {
+
+	/** public void setTurtleStatus(boolean active) {
 		this.activeStatus = active;
-	}
-	
-	@Override
+	} **/
+
+	//@Override
 	/**
 	 * @return whether or not the turtle is active
 	 */
-	public boolean getTurtleStatus() {
+	/** public boolean getTurtleStatus() {
 		return activeStatus;
-	}
+	} **/
 }

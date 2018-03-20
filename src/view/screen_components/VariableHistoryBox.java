@@ -34,25 +34,10 @@ public class VariableHistoryBox extends ScreenComponent implements Observer {
 	 * Constructor
 	 * @see ScreenComponent
 	 */
-	public VariableHistoryBox(){
+	public VariableHistoryBox(ValueModifierDelegate v, ClearValueDelegate c){
 		super();
-	}
-
-
-	/**
-	 * Set's up this class' clearValueDelegate
-	 * @param clearValueDelegate interface which allows clearing of variables
-	 */
-	public void setClearValueDelegate(ClearValueDelegate clearValueDelegate){
-		this.clearValueDelegate = clearValueDelegate;
-	}
-
-	/**
-	 * Set's up this class' clearValueDelegate
-	 * @param valueModifierDelegate interface which allows modifying of variables =
-	 */
-	public void setValueModifierDelegate(ValueModifierDelegate valueModifierDelegate){
-		this.valueModifierDelegate = valueModifierDelegate;
+		this.valueModifierDelegate = v;
+		this.clearValueDelegate = c;
 	}
 
 	/**

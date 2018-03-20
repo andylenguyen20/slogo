@@ -11,6 +11,7 @@ import propertiesFiles.ResourceBundleManager;
 
 /**
  * CLass which provides a popup box with various buttons which provide images of Slogo commands
+ * @author Edward Zhuang
  */
 public class HelpPopup {
     public static final int STAGE_WIDTH = 600;

@@ -21,9 +21,7 @@ public class SetPosition extends GeneralCommand {
 	 */
 	public double evaluate(List<NodeInterface> arguments)
 	{
-		double x = arguments.get(0).getValue();
-		double y = arguments.get(1).getValue();
-		model.update(t -> setPosition(t, x, y));
+		model.update(t -> setPosition(t, arguments.get(0).getValue(),  arguments.get(1).getValue()));
 		return value;
 	}
 

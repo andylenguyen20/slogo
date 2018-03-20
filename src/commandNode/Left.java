@@ -35,9 +35,8 @@ public class Left extends GeneralCommand {
 	 */
 	public double evaluate(List<NodeInterface> arguments)
 	{
-		double x = arguments.get(0).getValue();
-		model.update(t -> left(t, x));
-		value = x;
+		model.update(t -> left(t, arguments.get(0).getValue()));
+		value = arguments.get(0).getValue();
 		return value;
 	}
 

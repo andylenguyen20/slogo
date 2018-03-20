@@ -24,4 +24,8 @@ public class ID extends GeneralCommand {
 		return value;
 	}
 
+	@Override public double getValue() {
+		return evaluate(null); //returns value
+	}
+
 }
