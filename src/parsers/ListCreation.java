@@ -25,7 +25,6 @@ public class ListCreation extends NodeCreation {
 		ListNode l = new ListNode();
 		String noBrackets = text.substring(1,text.length()-1);
 		String trimmed = noBrackets.trim();
-		//newCommand = false;
 		Parser newParser = new Parser(model, variablesHistory, commandHistory);
 		newParser.setLanguage(language);
 		List<NodeInterface> listNodes = newParser.parseString(trimmed);

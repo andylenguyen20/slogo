@@ -33,8 +33,8 @@ public class Parser
 	private final String REGEX_FILE = "parsers/regex";
 	private final String CREATION_PACKAGE = "parsers.";
 	private Model model;
-	private VariablesHistory varHistory;
-	private CommandHistory comHistory;
+	private VariablesHistory variablesHistory;
+	private CommandHistory commandHistory;
 	private String lang = "English";
 
 	/**
@@ -51,8 +51,8 @@ public class Parser
 		regex = new HashMap<>();
 		addResources(REGEX_FILE, regex);
 		model = m;
-		varHistory = VH;
-		comHistory = CH;
+		variablesHistory = VH;
+		commandHistory = CH;
 	}
 
 	/**
@@ -104,14 +104,14 @@ public class Parser
 	{
 		String oldLanguage = lang;
 		setLanguage(ResourceBundleManager.retrieveOnScreenCommand("DEFAULT_LANGUAGE"));
-		comHistory.addCommand(command);
+		commandHistory.addCommand(command);
 		List<NodeInterface> fromButton = parseString(command);
 		makeTree(fromButton);
 		setLanguage(oldLanguage);
 	}
 
 	public void passTextCommand(String command){
-		comHistory.addCommand(command);
+		commandHistory.addCommand(command);
 		List<NodeInterface> nodeList = this.parseString(command);
 		this.makeTree(nodeList);
 	}
@@ -148,7 +148,7 @@ public class Parser
 			}
 			if(!match)
 			{
-				comHistory.addCommand("Error: Invalid entry, no command " + text );
+				commandHistory.addCommand("Error: Invalid entry, no command " + text );
 				throw new InvalidEntryException("Error: Invalid entry, no such command");
 			}
 		}
@@ -161,11 +161,11 @@ public class Parser
 			{
 				Constructor<?> c = Class.forName(CREATION_PACKAGE + key + "Creation").getConstructor(new Class[] {CommandHistory.class,VariablesHistory.class});
 				c.setAccessible(true);
-				((NodeCreation) c.newInstance(comHistory, varHistory)).makeNode(text, model, lang, nodeList);
+				((NodeCreation) c.newInstance(commandHistory, variablesHistory)).makeNode(text, model, lang, nodeList);
 			} 
 			catch (Exception e) 
 			{
-				comHistory.addCommand("Error: Could not evaluate command");
+				commandHistory.addCommand("Error: Could not evaluate command");
 				throw new InvalidEntryException("Error: Could not evaluate command");
 			}
 	}
