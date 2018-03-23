@@ -10,8 +10,14 @@ import model.VariablesHistory;
 import nodes.ListNode;
 import nodes.NodeInterface;
 /**
+ * Masterpiece Comments: This is one subclass of node creation that demonstrates how 
+ * the parser is able to use polymorphism to call the make node method without
+ * worrying about which kind of node it was referring to. 
+ * 
  * @author Belanie Nagiel
- *
+ * 
+ * This class is a subclass of the NodeCreation super class that deals
+ * with creating a List node given information from the parser.
  */
 public class ListCreation extends NodeCreation {
 	private CommandHistory commandHistory;

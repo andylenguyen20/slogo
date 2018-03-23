@@ -20,7 +20,10 @@ import nodes.*;
 import propertiesFiles.ResourceBundleManager;
 
 /**
- * Masterpiece Comments: I think this version of the Parser is better designed, because it 
+ * Masterpiece Comments: I think this version of the Parser is better designed, because it moves the creation of the
+ * nodes for the node list into individual node creation classes. This gets rid of the case statements that were originally
+ * in the parser, making the code more readable and also moving the details of node creation out of the Parser. This
+ * allows the Parser to have fewer jobs.
  * 
  * @author Belanie Nagiel
  *
