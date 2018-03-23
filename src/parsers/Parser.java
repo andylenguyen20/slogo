@@ -20,6 +20,8 @@ import nodes.*;
 import propertiesFiles.ResourceBundleManager;
 
 /**
+ * Masterpiece Comments: I think this version of the Parser is better designed, because it 
+ * 
  * @author Belanie Nagiel
  *
  * This class takes in command strings and outputs them as lists of nodes so that the the tree building class
@@ -39,8 +41,8 @@ public class Parser
 
 	/**
 	 * Class Constructor
-	 * Creates the two hashmaps for the syntax recognition and command recognition
-	 * given the current language.
+	 * Creates the map of the data type regular expressions to the data type and initializes 
+	 * private for the model, variable history, and command history.
 	 *
 	 * @param m the current model
 	 * @param VH the variable history
@@ -57,8 +59,7 @@ public class Parser
 
 	/**
 	 * Creates a hashmap given a file path to a properties file and a map to fill. Used to
-	 * create key value pairs of syntax to patterns and commands to patterns in the given
-	 * language
+	 * create key value pairs of data type syntax to patterns
 	 *
 	 * @param filepath
 	 * @param map
@@ -75,18 +76,22 @@ public class Parser
 	}
 
 	/**
-	 * Creates a list of nodes out of the string command given as an argument
-	 *
-	 * @param language The language from the GUI
-	 * @return a list of nodes that the tree builder can use to create the tree
-	 * @throws ClassNotFoundException
-	 * @throws InvalidEntryException
+	 * Sets the language that the parser will be translating commands in.
+	 * 
+	 * @param language
 	 */
 	public void setLanguage(String language)
 	{
 		lang = language;
 	}
 
+	/**
+	 * Takes in a command string, removes any comments included in the command, and 
+	 * sends a split version of the string to be turned into nodes for the tree
+	 * 
+	 * @param command
+	 * @return
+	 */
 	protected List<NodeInterface> parseString(String command)
 	{
 		int commentIndex = command.indexOf("#");
@@ -100,6 +105,12 @@ public class Parser
 		return nodeList;
 	}
 
+	/**
+	 * Parses a command that is activated by pressing a button on the view. Sets the language for
+	 * the command recognition to the default language for buttons and creates the tree based 
+	 * on the list of nodes from parse string.
+	 * @param command
+	 */
 	public void passActionCommand(String command)
 	{
 		String oldLanguage = lang;
@@ -110,13 +121,25 @@ public class Parser
 		setLanguage(oldLanguage);
 	}
 
+	/**
+	 * Parses a command that is given by a string of user input and 
+	 * creates a tree based on the list of nodes from parseString
+	 * 
+	 * @param command
+	 */
 	public void passTextCommand(String command){
 		commandHistory.addCommand(command);
-		List<NodeInterface> nodeList = this.parseString(command);
-		this.makeTree(nodeList);
+		List<NodeInterface> nodeList = parseString(command);
+		makeTree(nodeList);
 	}
 
 
+	/**
+	 * Takes in the node list created by parsre and creates and evaluates
+	 * the appropriate tree in order to process the command
+	 * 
+	 * @param nodeList
+	 */
 	public void makeTree(List<NodeInterface> nodeList)
 	{
 		TreeMaker tm  = new TreeMaker(nodeList);
@@ -126,8 +149,8 @@ public class Parser
 	}
 
 	/**
-	 * fill the nodeList with the appropriate nodes based on matching string input to node types
-	 * also checks for syntax errors
+	 * Matches string inputs to their appropriate data types and sends information 
+	 * to the buildNodeList class in order to create the node list.
 	 *
 	 * @param commandList the list of strings given by the user
 	 * @param nodeList the empty nodeList that will be filled
@@ -155,6 +178,14 @@ public class Parser
 
 	}
 
+	/**
+	 * Uses reflection to create the proper node creation object for a specific user input. 
+	 * Adds the node created to the node list that will be used to create the tree.
+	 * 
+	 * @param key
+	 * @param text
+	 * @param nodeList
+	 */
 	private void buildNodeList(String key, String text, List<NodeInterface> nodeList) 
 	{
 			try 
