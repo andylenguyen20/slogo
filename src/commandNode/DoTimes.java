@@ -33,7 +33,6 @@ public class DoTimes extends GeneralCommand {
 			Constant limit = (Constant) l.getElement(1);
 			ListNode l2 = (ListNode) args.get(1);
 			while (v.getValue() <= limit.getValue()) {
-				System.out.println(v.getValue());
 				value = l2.evaluate();
 				double next = v.getValue();
 				next++;

@@ -250,16 +250,4 @@ public class Turtle implements TurtleObservable, NodeInterface
 		return ID;
 	}
 
-
-	/** public void setTurtleStatus(boolean active) {
-		this.activeStatus = active;
-	} **/
-
-	//@Override
-	/**
-	 * @return whether or not the turtle is active
-	 */
-	/** public boolean getTurtleStatus() {
-		return activeStatus;
-	} **/
 }
