@@ -65,6 +65,12 @@ public class Turtle implements TurtleObservable, NodeInterface
 		turtleShape = startShape;
 		toroidal = new WraparoundHandler(width, height);
 	}
+
+	public Turtle (Turtle t) {
+		this(t.XCoordinate*2, t.YCoordinate*2, t.penColor, t.ID, t.turtleShape);
+		this.setDirectionAngle(t.getDirectionAngle());
+	}
+
 	/**
 	 *
 	 * @return the current x coordinate

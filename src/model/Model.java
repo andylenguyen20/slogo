@@ -22,6 +22,7 @@ public class Model implements PaletteObservable, DrawerObservable {
 	private List<Color> colorOptions;
 	private List<String> shapeOptions;
 	private List<Turtle> activeTurtles;
+	private List<Turtle> stampedTurtles = new ArrayList<>();
 	private Map<Double,Turtle> allTurtles;
 
 	private static double XHome;
@@ -233,6 +234,28 @@ public class Model implements PaletteObservable, DrawerObservable {
 		drawerObserver.notifyOfChanges();
 	}
 
+	public double stamp() {
+		double ret = 0;
+		for (Turtle t : activeTurtles) {
+			Turtle copy = new Turtle(t);
+			ret = copy.getValue();
+			stampedTurtles.add(copy);
+		}
+		drawerObserver.notifyOfChanges();
+		return ret;
+	}
+
+	public int clearStamps() {
+		int ret = 0;
+		if (stampedTurtles.size() > 0 ) ret = 1;
+		for (Turtle t : stampedTurtles) {
+			t.setOpacity(0);
+		}
+		drawerObserver.notifyOfChanges();
+		stampedTurtles.clear();
+		return ret;
+	}
+
 	@Override
 	/**
 	 * Gets the information for the view from each active turtle 
@@ -241,6 +264,9 @@ public class Model implements PaletteObservable, DrawerObservable {
 		List<TurtleObservable> turtleList = new ArrayList<>();
 		for(double key: this.getAllTurtles().keySet()){
 			turtleList.add(this.getAllTurtles().get(key));
+		}
+		for (Turtle t : stampedTurtles) {
+			turtleList.add(t);
 		}
 		return turtleList;
 	}
