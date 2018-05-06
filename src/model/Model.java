@@ -23,6 +23,7 @@ public class Model implements PaletteObservable, DrawerObservable {
 	private List<String> shapeOptions;
 	private List<Turtle> activeTurtles;
 	private Map<Double,Turtle> allTurtles;
+	private List<Turtle> turtleStamps;
 
 	private static double XHome;
 	private static double YHome;
@@ -45,6 +46,8 @@ public class Model implements PaletteObservable, DrawerObservable {
 		initializeShapes();
 		activeTurtles = new ArrayList<>();
 		allTurtles = new HashMap<>();
+		turtleStamps = new ArrayList<>();
+		
 		XHome = width;
 		YHome = height;
 
@@ -98,6 +101,49 @@ public class Model implements PaletteObservable, DrawerObservable {
 		allTurtles.put( t.getValue(), t);
 		activeTurtles.add(t);
 		drawerObserver.notifyOfChanges();
+	}
+	
+	/**
+	 * adds a turtle image to the turtle stamps list
+	 * 
+	 * @param xCoordinate
+	 * @param yCoordinate
+	 * @param shape
+	 */
+	public void addStamp(double xCoordinate, double yCoordinate, double angle,  String shape)
+	{
+		Turtle imageForStamp = new Turtle(xCoordinate, yCoordinate, angle, shape);
+		turtleStamps.add(imageForStamp);
+		drawerObserver.notifyOfChanges();
+	}
+	
+	/**
+	 * Removes a stamp by hiding the image of the turtle
+	 * 
+	 * @param t
+	 */
+	public void removeStamp(Turtle t)
+	{
+		t.setTurtleShowing(false);
+		drawerObserver.notifyOfChanges();
+	}
+	
+	public List<Turtle> getTurtleStamps()
+	{
+		return turtleStamps;
+	}
+	
+	public double getIndexOfShape(String shape)
+	{
+		for(int i = 0; i < shapeOptions.size(); i++)
+		{
+			if(shapeOptions.get(i).equals(shape))
+			{
+				return i;
+			}
+		}
+		return 0;
+		
 	}
 
 	/**
@@ -239,8 +285,14 @@ public class Model implements PaletteObservable, DrawerObservable {
 	 */
 	public List<TurtleObservable> getTurtleObservables() {
 		List<TurtleObservable> turtleList = new ArrayList<>();
-		for(double key: this.getAllTurtles().keySet()){
+		for(double key: this.getAllTurtles().keySet())
+		{
 			turtleList.add(this.getAllTurtles().get(key));
+		}
+		//This makes the observable know that it should look at the turtle pictures from the stamps
+		for(Turtle stamp: turtleStamps)
+		{
+			turtleList.add(stamp);
 		}
 		return turtleList;
 	}

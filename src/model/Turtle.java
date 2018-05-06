@@ -38,7 +38,6 @@ public class Turtle implements TurtleObservable, NodeInterface
 	private String turtleShape;
 	private double ID;
 
-
 	/**
 	 * Class constructor
 	 * 
@@ -64,6 +63,12 @@ public class Turtle implements TurtleObservable, NodeInterface
 		this.ID = ID;
 		turtleShape = startShape;
 		toroidal = new WraparoundHandler(width, height);
+	}
+	
+	public Turtle(double xCoordinate, double yCoordinate, double angle, String shape)
+	{
+		this(xCoordinate*2, yCoordinate*2, Color.WHITE, 0.0, shape);
+		this.setDirectionAngle(angle);
 	}
 	/**
 	 *
