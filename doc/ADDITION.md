@@ -1,4 +1,21 @@
+Estimation:
 * how long do you think it will take you to complete this new feature?
 	* I think that this will take 3 hours to complete this feature.
 * how many files will you need to add or update? Why?
 	* I will need to add a ScreenComponent subclass that represents the new view to be added to the GUI. In addition, I will need to add another Controller subclass because that is needed to act as a delegate for the new ScreenComponent class I just created. These two class additions were always going to be necessarily added with the requirement for a new View, as described in my SLOGO analysis/design.md. I also would need to add a few lines of code within the Workspace class to add the instantiation of the new Controller object I plan to create. I also need to add a bit of code to the GUI class to position the ScreenComponent subclass onto the main GUI. On top of these classes, I do need to modify the Model class in the backend because it wasn’t designed well enough to handle actions on individual (not just active) turtles, so I would have to go back and modify code to account for that. 
+
+Review:
+* how long did it take you to complete this new feature?
+	* it actually only ended up taking about an hour and 15 minutes to complete this feature.
+* how many files did you need to add or update? Why?
+	* I had to create two new files and needed to modify four files. I needed to add two files because my current design required that for every new view I needed to create, I had to create a ScreenComponent subclass as well as a Controller subclass. I had to modify the Model class in the backend because there was no command that targetted specific turtles, so I had to add a method to that class. In addition I had to update the GUI class and style.css file because of positioning/sizing reasons for fitting the new view onto the screen. I also had to update the Workspace class to add instantiation of an additional Controller subclass that I created. I think I potentially could have avoid this one by instantiating my controllers through a resource bundle using reflection.
+* did you get it completely right on the first try?
+	* my controller-screen component design was straightforward enough where I got it completely right on the first try
+	
+Analysis: what do you feel this exercise reveals about your project's design and documentation?
+* was it as good (or bad) as you remembered?
+	* I think my documentation was as good as I remembered because I understood the code right away after reading my comments. My design was pretty good because I didn't have to change too many classes, however, the fact that I did need to actually modify classes meant that I failed to keep my code completely closed, which is a bad aspect of my design. 
+* what could be improved?
+	* I realized that for the GUI class and the Workspace class, I had to add very simple lines of code each, either to an instantiation chain or if statement check/constants addition for positioning. The fact that I had to modify these classes meant by design wasn't completely closed albeit the fact that the additions to the files were very simple and straightforward. I think this could have been improved in both cases by having my instantiations/checks/positioning coded in resource bundles that I could write to. This is much better since no code would actually have to be changed; in addition, the code could be more general and less specific to instantiating a bunch of specific classes. In regards to my change to the Model class, I think this could have been improved by having a conversation with the backend team earlier on about the exact interface that we wanted Model to have. The fact that I had to add a whole new method to the Model class meant that the interface was not solidified totally.
+* what would it have been like if you were not familiar with the code at all?
+	* If I wasn't familiar with the code at all, I think I still would have been able to figure out how to accomplish the creation of the new Controller subclass and the ScreenComponent subclass because I think these were documented well and were very straightfoward. However, I think I would have been a little confused about how to provide implementation for changing the turtle's image using the Model class since the interface was not necessarily the best designed.
