@@ -63,6 +63,7 @@ public class Workspace {
         controllerList.add(new CustomCommandBoxController(gui, variableHistory, parser));
         controllerList.add(new CommandHistoryBoxController(gui, commandHistory, parser));
         controllerList.add(new CommandBoxController(gui, parser));
+        controllerList.add(new TurtleImageBoxController(gui, model));
     }
 
     /**
