@@ -29,7 +29,7 @@ public class Model implements PaletteObservable, DrawerObservable {
 
 	private int currentTurtle = 0;
 
-	private Observer drawerObserver;
+	private List<Observer> drawerObservers;
 
 	private Observer colorIndexObserver;
 
@@ -41,6 +41,7 @@ public class Model implements PaletteObservable, DrawerObservable {
 	 */
 	public Model(double width, double height)
 	{
+		drawerObservers = new ArrayList<>();
 		initializeColors();
 		initializeShapes();
 		activeTurtles = new ArrayList<>();
@@ -79,6 +80,11 @@ public class Model implements PaletteObservable, DrawerObservable {
 	{
 		return shapeOptions;
 	}
+	
+	public void setTurtleShape(double ID, int shapeIndex){
+		allTurtles.get(ID).setTurtleShape(shapeOptions.get(shapeIndex));
+		notifyDrawerObservers();
+	}
 
 	/**
 	 * @return the map of all turtles whether active or not
@@ -97,7 +103,13 @@ public class Model implements PaletteObservable, DrawerObservable {
 		Turtle t = new Turtle (XHome, YHome, Color.BLUE, ID, shapeOptions.get(0));
 		allTurtles.put( t.getValue(), t);
 		activeTurtles.add(t);
-		drawerObserver.notifyOfChanges();
+		notifyDrawerObservers();
+	}
+	
+	private void notifyDrawerObservers(){
+		for(Observer o: drawerObservers){
+			o.notifyOfChanges();
+		}
 	}
 
 	/**
@@ -125,7 +137,7 @@ public class Model implements PaletteObservable, DrawerObservable {
 	public void setBackgroundColor(double index)
 	{
 		this.backgroundColor = colorOptions.get((int) index);
-		drawerObserver.notifyOfChanges();
+		notifyDrawerObservers();
 	}
 
 	/**
@@ -192,11 +204,11 @@ public class Model implements PaletteObservable, DrawerObservable {
 			currentTurtle++;
 		}
 		currentTurtle = 0;
-		drawerObserver.notifyOfChanges();
+		notifyDrawerObservers();
 	}
 
 	public void addDrawerObserver(Observer observer){
-		drawerObserver = observer;
+		this.drawerObservers.add(observer);
 	}
 
 	public void addObserver(Observer colorListObserver) {
@@ -230,7 +242,7 @@ public class Model implements PaletteObservable, DrawerObservable {
 			activeTurtles.remove(t);
 			t.setOpacity(INACTIVE_OPACITY);
 		}
-		drawerObserver.notifyOfChanges();
+		notifyDrawerObservers();
 	}
 
 	@Override

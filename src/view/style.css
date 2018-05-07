@@ -55,9 +55,9 @@ HBox{
 .titlePane{
     -fx-background-image: url("/SLogo.PNG");
     -fx-background-size:stretch;
-    -fx-min-width: 400px;
-    -fx-pref-width: 400px;
-    -fx-min-height: 150px;
+    -fx-min-width: 200px;
+    -fx-pref-width: 200px;
+    -fx-min-height: 80px;
 }
 
 .text-area{

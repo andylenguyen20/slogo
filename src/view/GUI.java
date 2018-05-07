@@ -14,9 +14,11 @@ public class GUI{
     private static final String NAME = "Slogo Programming Environment";
 	private static final int WIDTH = 1100;
 	private static final int HEIGHT = 650;
-    public static final int TITLE_PANEL_X = 670;
+    public static final int TITLE_PANEL_X = 880;
     public static final int TITLE_PANEL_Y = 10;
-
+    public static final double TITLE_WIDTH = 200;
+    public static final double TITLE_HEIGHT = 100;
+    
     public static final int DRAWER_X = 165;
     public static final int DRAWER_Y = 15;
 
@@ -43,6 +45,9 @@ public class GUI{
 
     public static final int PALETTE_X = 0;
     public static final int PALETTE_Y= 0;
+    
+    public static final int TURTLE_IMAGE_BOX_X = 680;
+    public static final int TURTLE_IMAGE_BOX_Y = 10;
 
     private Button helpButton;
 
@@ -89,6 +94,8 @@ public class GUI{
             this.positionBorderPane(screenComponent.getGUIComponent(), TURTLE_CONTROL_PANEL_X, TURTLE_CONTROL_PANEL_Y);
         }else if(screenComponent instanceof VariableHistoryBox){
             this.positionBorderPane(screenComponent.getGUIComponent(), VARIABLE_HISTORY_BOX_X, VARIABLE_HISTORY_BOX_Y);
+        }else if(screenComponent instanceof TurtleImageBox){
+            this.positionBorderPane(screenComponent.getGUIComponent(), TURTLE_IMAGE_BOX_X, TURTLE_IMAGE_BOX_Y);
         }else{
             throw new ImproperScreenComponentException("Trying to position an improper screen component onto the GUI");
         }
@@ -105,6 +112,8 @@ public class GUI{
         titlePane.getStyleClass().add("titlePane");
         titlePane.setLayoutX(TITLE_PANEL_X);
         titlePane.setLayoutY(TITLE_PANEL_Y);
+        titlePane.setMaxWidth(TITLE_WIDTH);
+        titlePane.setMaxHeight(TITLE_HEIGHT);
         root.getChildren().add(titlePane);
     }
 
