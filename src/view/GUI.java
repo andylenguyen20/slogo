@@ -12,7 +12,7 @@ import view.view_exceptions.ImproperScreenComponentException;
 
 public class GUI{
     private static final String NAME = "Slogo Programming Environment";
-	private static final int WIDTH = 1100;
+	private static final int WIDTH = 1300;
 	private static final int HEIGHT = 650;
     public static final int TITLE_PANEL_X = 670;
     public static final int TITLE_PANEL_Y = 10;
@@ -43,6 +43,8 @@ public class GUI{
 
     public static final int PALETTE_X = 0;
     public static final int PALETTE_Y= 0;
+    public static final int IMAGE_CHANGER_X = 1150;
+    public static final int IMAGE_CHANGER_Y = 0;
 
     private Button helpButton;
 
@@ -89,7 +91,10 @@ public class GUI{
             this.positionBorderPane(screenComponent.getGUIComponent(), TURTLE_CONTROL_PANEL_X, TURTLE_CONTROL_PANEL_Y);
         }else if(screenComponent instanceof VariableHistoryBox){
             this.positionBorderPane(screenComponent.getGUIComponent(), VARIABLE_HISTORY_BOX_X, VARIABLE_HISTORY_BOX_Y);
-        }else{
+        }else if(screenComponent instanceof ImageChanger){
+            this.positionBorderPane(screenComponent.getGUIComponent(), IMAGE_CHANGER_X, IMAGE_CHANGER_Y);
+        }
+        else{
             throw new ImproperScreenComponentException("Trying to position an improper screen component onto the GUI");
         }
     }

@@ -4,9 +4,11 @@ import java.util.*;
 
 import java.util.function.Consumer;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import view.Observer;
 import view.constants.PaletteConstants;
+import view.screen_components.ImageChanger;
 
 /**
  * This class serves as a way to keep track of the background color, the shape of the turtle, and the current active and 
@@ -15,7 +17,7 @@ import view.constants.PaletteConstants;
  * @author Belanie Nagiel, Charlie Dracos, and Andy Nguyen
  *
  */
-public class Model implements PaletteObservable, DrawerObservable {
+public class Model implements PaletteObservable, DrawerObservable, ImageChangerObservable {
 	private static final double INACTIVE_OPACITY = 0.3;
 	private static final double ACTIVE_OPACITY = 1;
 	private Color backgroundColor;
@@ -32,6 +34,8 @@ public class Model implements PaletteObservable, DrawerObservable {
 	private Observer drawerObserver;
 
 	private Observer colorIndexObserver;
+
+	private Observer imageChangerObserver;
 
 	/**
 	 * Class Constructor
@@ -193,6 +197,7 @@ public class Model implements PaletteObservable, DrawerObservable {
 		}
 		currentTurtle = 0;
 		drawerObserver.notifyOfChanges();
+		imageChangerObserver.notifyOfChanges();
 	}
 
 	public void addDrawerObserver(Observer observer){
@@ -220,6 +225,10 @@ public class Model implements PaletteObservable, DrawerObservable {
 		colorIndexObserver.notifyOfChanges();
 	}
 
+	public void initializeImageChanger(){
+		imageChangerObserver.notifyOfChanges();
+	}
+
 	public void changeTurtleActivity (double ID) {
 		Turtle t = allTurtles.get(ID);
 		if (!activeTurtles.contains(t)) {
@@ -231,6 +240,7 @@ public class Model implements PaletteObservable, DrawerObservable {
 			t.setOpacity(INACTIVE_OPACITY);
 		}
 		drawerObserver.notifyOfChanges();
+		imageChangerObserver.notifyOfChanges();
 	}
 
 	@Override
@@ -243,5 +253,26 @@ public class Model implements PaletteObservable, DrawerObservable {
 			turtleList.add(this.getAllTurtles().get(key));
 		}
 		return turtleList;
+	}
+
+
+
+	@Override
+	public List<TurtleObservable> getAllTurtleObservables() {
+		return getTurtleObservables();
+	}
+
+	public void addImageChangerObserver(Observer imageChanger) {
+		this.imageChangerObserver = imageChanger;
+	}
+
+	public void changeTurtleColor(double value, int shapeNumber){
+		for(double key: this.getAllTurtles().keySet()){
+			if (value == key){
+				this.getAllTurtles().get(key).setTurtleShape(shapeOptions.get(shapeNumber));
+			}
+		}
+		imageChangerObserver.notifyOfChanges();
+		drawerObserver.notifyOfChanges();
 	}
 }
